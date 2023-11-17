@@ -7,21 +7,24 @@ import AuthDomain
 
 
 public class EmailPasswordAuthenticateUseCaseGatewayImpl: AuthenticateUseCaseGateway {
-    private let authentication: AuthenticationEmailPassword
+    private let authentication: AuthenticationEmailProvider
     
-    public init(authentication: AuthenticationEmailPassword) {
+    public init(authentication: AuthenticationEmailProvider) {
         self.authentication = authentication
     }
     
     public func auth(email: String, password: String) async throws -> UserId {
+        
         return try await withCheckedThrowingContinuation { continuation in
-            authentication.auth(email: email, password: password) { userId, authError in
+            
+            authentication.signIn(email: email, password: password) { userId, authError in
                 if let authError {
                     continuation.resume(throwing: authError.code)
                     return
                 }
                 continuation.resume(returning: userId ?? "")
             }
+            
         }
         
     }

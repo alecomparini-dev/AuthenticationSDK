@@ -11,14 +11,13 @@ let package = Package(
     ],
 
     products: [
-        .library( name: "AuthenticationSDK", targets: ["AuthDomain", "AuthUseCaseGateway", "AuthProvider", "LocalAuth"]),
+        .library( name: "AuthenticationSDK", targets: ["AuthSDKMain"]),
     ],
     
     dependencies: [
         .package(url: "https://github.com/firebase/firebase-ios-sdk.git", branch: "10.18.0")
     ],
 
-    
     
     targets: [
         
@@ -30,6 +29,7 @@ let package = Package(
         ),
         
         
+        
 //MARK: - INTERFACE ADAPTER LAYER
         .target(
             name: "AuthUseCaseGateway",
@@ -37,6 +37,14 @@ let package = Package(
             path: "Sources/2InterfaceAdapter/UseCaseGateway"
         ),
 
+        
+        .target(
+            name: "AuthController",
+            dependencies: ["AuthDomain"],
+            path: "Sources/2InterfaceAdapter/Controller"
+        ),
+
+        
         
 //MARK: - DETAIL
         .target(
@@ -49,7 +57,7 @@ let package = Package(
         ),
 
         .target(
-            name: "LocalAuth",
+            name: "AuthLocal",
             dependencies: [
                 "AuthUseCaseGateway",
                 "AuthDomain"
@@ -58,6 +66,19 @@ let package = Package(
         ),
 
         
+        
+//  MARK: - MAIN LAYER
+        .target(
+            name: "AuthSDKMain",
+            dependencies: [
+                "AuthController",
+                "AuthProvider",
+                "AuthLocal"
+            ],
+            path: "Sources/Main"
+        ),
+        
+
         
 //MARK: - TESTE
         
