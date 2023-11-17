@@ -6,18 +6,18 @@ import Foundation
 import AuthDomain
 
 
-public class EmailPasswordAuthenticateUseCaseGatewayImpl: AuthenticateUseCaseGateway {
-    private let authentication: AuthenticationEmailProvider
+public class AuthenticateEmailUseCaseGatewayImpl: AuthenticateEmailUseCaseGateway {
+    private let authenticationEmail: AuthenticationEmailProvider
     
-    public init(authentication: AuthenticationEmailProvider) {
-        self.authentication = authentication
+    public init(authenticationEmail: AuthenticationEmailProvider) {
+        self.authenticationEmail = authenticationEmail
     }
     
-    public func auth(email: String, password: String) async throws -> UserId {
+    public func signInEmail(email: String, password: String) async throws -> UserId {
         
         return try await withCheckedThrowingContinuation { continuation in
             
-            authentication.signIn(email: email, password: password) { userId, authError in
+            authenticationEmail.signIn(email: email, password: password) { userId, authError in
                 if let authError {
                     continuation.resume(throwing: authError.code)
                     return

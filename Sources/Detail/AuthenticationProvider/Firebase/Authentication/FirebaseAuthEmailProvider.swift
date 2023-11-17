@@ -3,10 +3,10 @@
 
 import Foundation
 
-import FirebaseAuth
 import AuthUseCaseGateway
+import FirebaseAuth
 
-public class FirebaseEmailAuth: AuthenticationEmailProvider {
+public class FirebaseAuthEmailProvider: AuthenticationEmailProvider {
 
     private let auth: Auth
     
@@ -25,10 +25,27 @@ public class FirebaseEmailAuth: AuthenticationEmailProvider {
             }
         }
         
-        linkAnonimousToEmailAuthProviderIfNeeded(email: email, password: password, completion: completion)
+        linkAnonymousToEmailAuthProviderIfNeeded(email: email, password: password, completion: completion)
     }
     
-    private func linkAnonimousToEmailAuthProviderIfNeeded(email: String, password: String, completion: @escaping (UserId?, AuthenticationError?) -> Void) {
+    public func signIn(email: String, password: String, completion: @escaping (UserId?, AuthenticationError?) -> Void) {
+        
+        auth.signIn(withEmail: email, password: password) { [weak self] result, error in
+            guard let self else {return}
+            if let error = error as? NSError {
+                let error = makeAuthenticationError(error)
+                completion(nil, error)
+                return
+            }
+            completion(result?.user.uid, nil)
+        }
+    }
+    
+    
+    
+//  MARK: - PRIVATE AREA
+    
+    private func linkAnonymousToEmailAuthProviderIfNeeded(email: String, password: String, completion: @escaping (UserId?, AuthenticationError?) -> Void) {
         
         guard let user = auth.currentUser else { return completion(nil, AuthenticationError(code: .userNotAuthenticated)) }
                     
@@ -54,22 +71,6 @@ public class FirebaseEmailAuth: AuthenticationEmailProvider {
         
     }
     
-    public func signIn(email: String, password: String, completion: @escaping (UserId?, AuthenticationError?) -> Void) {
-        
-        auth.signIn(withEmail: email, password: password) { [weak self] result, error in
-            guard let self else {return}
-            if let error = error as? NSError {
-                let error = makeAuthenticationError(error)
-                completion(nil, error)
-                return
-            }
-            completion(result?.user.uid, nil)
-        }
-    }
-    
-    
-    
-//  MARK: - PRIVATE AREA
     private func makeAuthenticationError(_ error: NSError) -> AuthenticationError {
         switch error.code {
             case 17026:
