@@ -6,10 +6,7 @@ import Foundation
 public class AuthSDKMain {
     public typealias UserId = String
     
-    
     public init() {}
     
 }
-
-
 

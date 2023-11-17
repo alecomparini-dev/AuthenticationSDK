@@ -17,7 +17,6 @@ public extension AuthSDKMain {
         let authEmailUseCase = AuthenticateEmailUseCaseImpl(authEmailGateway: authEmailGateway)
         
         return try await authEmailUseCase.signIn(email: email, password: password)
-        
     }
     
 }
