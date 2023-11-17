@@ -9,15 +9,15 @@ import AuthProvider
 
 public extension AuthSDKMain {
     
-    func signInAnonymous() async throws -> UserId {
+    func signInAnonymous() async throws -> UserId? {
         
+        let authenticationAnonymous = FirebaseAuthAnonymousProvider()
         
-//        let asdf = authenti
+        let authAnonymousGateway = AuthenticateAnonymousUseCaseGatewayImpl(authenticationAnonymous: authenticationAnonymous)
         
-//        let authAnonymousUseCase = AuthenticateAnonymousUseCaseImpl(authAnonymousGateway: )
+        let authAnonymousUseCase = AuthenticateAnonymousUseCaseImpl(authAnonymousGateway: authAnonymousGateway)
         
-        return ""
-        
+        return try await authAnonymousUseCase.signIn()
     }
     
 }
