@@ -3,10 +3,10 @@
 
 import Foundation
 
-import FirebaseAuth
 import AuthUseCaseGateway
+import FirebaseAuth
 
-public class FirebaseEmailPasswordAuthentication: AuthenticationEmailPassword {
+public class FirebaseAuthEmailProvider: AuthenticationEmailProvider {
 
     private let auth: Auth
     
@@ -15,6 +15,7 @@ public class FirebaseEmailPasswordAuthentication: AuthenticationEmailPassword {
     }
     
     public func createAuth(email: String, password: String, completion: @escaping (UserId?, AuthenticationError?) -> Void) {
+        
         auth.createUser(withEmail: email, password: password) { [weak self] result, error in
             guard let self else {return}
             if let error = error as? NSError {
@@ -22,11 +23,13 @@ public class FirebaseEmailPasswordAuthentication: AuthenticationEmailPassword {
                 completion(nil, error)
                 return
             }
-            completion(result?.user.uid, nil)
         }
+        
+        linkAnonymousToEmailAuthProviderIfNeeded(email: email, password: password, completion: completion)
     }
     
-    public func auth(email: String, password: String, completion: @escaping (UserId?, AuthenticationError?) -> Void) {
+    public func signIn(email: String, password: String, completion: @escaping (UserId?, AuthenticationError?) -> Void) {
+        
         auth.signIn(withEmail: email, password: password) { [weak self] result, error in
             guard let self else {return}
             if let error = error as? NSError {
@@ -41,6 +44,33 @@ public class FirebaseEmailPasswordAuthentication: AuthenticationEmailPassword {
     
     
 //  MARK: - PRIVATE AREA
+    
+    private func linkAnonymousToEmailAuthProviderIfNeeded(email: String, password: String, completion: @escaping (UserId?, AuthenticationError?) -> Void) {
+        
+        guard let user = auth.currentUser else { return completion(nil, AuthenticationError(code: .userNotAuthenticated)) }
+                    
+        if user.isAnonymous {
+            let credential = EmailAuthProvider.credential(withEmail: email, password: password)
+            
+            user.link(with: credential) { [weak self] result, error in
+                guard let self else {return}
+                
+                if let error = error as? NSError {
+                    let error = makeAuthenticationError(error)
+                    completion(nil, error)
+                    return
+                }
+                
+                completion(result?.user.uid, nil)
+            }
+            
+            return
+        }
+        
+        completion(user.uid, nil)
+        
+    }
+    
     private func makeAuthenticationError(_ error: NSError) -> AuthenticationError {
         switch error.code {
             case 17026:
