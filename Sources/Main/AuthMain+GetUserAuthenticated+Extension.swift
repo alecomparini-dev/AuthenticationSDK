@@ -6,7 +6,7 @@ import AuthDomain
 import AuthProvider
 import AuthUseCaseGateway
 
-public extension AuthSDKMain {
+public extension AuthenticationMain {
     
     func getUserAuthenticated(_ userAutenticator: UserAuthenticated = FirebaseUserAuthenticated()) async throws -> String? {
                 

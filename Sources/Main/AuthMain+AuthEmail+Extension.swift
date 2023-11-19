@@ -6,7 +6,7 @@ import AuthUseCaseGateway
 import AuthProvider
 
 
-public extension AuthSDKMain {
+public extension AuthenticationMain {
     
     func signInEmail(email: String, password: String) async throws -> UserId {
         
