@@ -11,7 +11,7 @@ let package = Package(
     ],
 
     products: [
-        .library( name: "AuthenticationSDK", targets: ["AuthSDKMain"]),
+        .library( name: "AuthenticationSDK", targets: ["AuthenticationSDKMain"]),
     ],
     
     dependencies: [
@@ -69,7 +69,7 @@ let package = Package(
         
 //  MARK: - MAIN LAYER
         .target(
-            name: "AuthSDKMain",
+            name: "AuthenticationSDKMain",
             dependencies: [
                 "AuthController",
                 "AuthProvider",
