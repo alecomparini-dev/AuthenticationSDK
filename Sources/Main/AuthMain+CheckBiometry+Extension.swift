@@ -6,7 +6,7 @@ import AuthProvider
 import AuthUseCaseGateway
 import AuthLocal
 
-public extension AuthSDKMain {
+public extension AuthenticationMain {
 
     func checkBiometry() -> CheckBiometryUseCaseDTO {
         

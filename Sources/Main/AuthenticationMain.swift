@@ -3,7 +3,7 @@
 
 import Foundation
 
-public class AuthSDKMain {
+public class AuthenticationMain {
     public typealias UserId = String
     
     public init() {}

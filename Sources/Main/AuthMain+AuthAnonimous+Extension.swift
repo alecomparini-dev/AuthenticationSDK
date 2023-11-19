@@ -7,7 +7,7 @@ import AuthDomain
 import AuthUseCaseGateway
 import AuthProvider
 
-public extension AuthSDKMain {
+public extension AuthenticationMain {
     
     func signInAnonymous() async throws -> UserId? {
         
