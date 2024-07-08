@@ -5,10 +5,10 @@
 import Foundation
 
 
-public protocol AuthenticationEmailPassword {
+public protocol AuthenticationEmailProvider {
     typealias UserId = String
     func createAuth(email: String, password: String, completion: @escaping (UserId?, AuthenticationError?) -> Void)
     
-    func auth(email: String, password: String, completion: @escaping (UserId?, AuthenticationError?) -> Void)
+    func signIn(email: String, password: String, completion: @escaping (UserId?, AuthenticationError?) -> Void)
     
 }

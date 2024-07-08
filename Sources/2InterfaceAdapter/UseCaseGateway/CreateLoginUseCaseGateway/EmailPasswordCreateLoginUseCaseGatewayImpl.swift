@@ -6,9 +6,9 @@ import Foundation
 import AuthDomain
 
 public class EmailPasswordCreateLoginUseCaseGatewayImpl: CreateLoginUseCaseGateway {
-    private let authenticator: AuthenticationEmailPassword
+    private let authenticator: AuthenticationEmailProvider
     
-    public init(authenticator: AuthenticationEmailPassword) {
+    public init(authenticator: AuthenticationEmailProvider) {
         self.authenticator = authenticator
     }
     
