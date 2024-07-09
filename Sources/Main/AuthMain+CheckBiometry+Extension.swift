@@ -2,7 +2,7 @@
 //
 
 import AuthDomain
-import AuthProvider
+import AuthSignIn
 import AuthUseCaseGateway
 import AuthLocal
 

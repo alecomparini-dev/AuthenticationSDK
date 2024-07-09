@@ -3,21 +3,19 @@
 
 import AuthController
 import AuthDomain
-import AuthProvider
+import AuthSignIn
 import AuthUseCaseGateway
+import AuthUserInfo
 
 public extension AuthenticationMain {
     
-    func getUserAuthenticated(_ userAutenticator: UserAuthenticated = FirebaseUserAuthenticated()) async throws -> String? {
+    func getUserAuthenticated(_ userAutenticator: UserAuthInfo = FirebaseUserAuthInfo()) async throws -> String? {
                 
-        let getUserAuthUserCaseGateway = GetUserAuthenticatedUseCaseGatewayImpl(
-            userAuthenticator: userAutenticator)
+        let getUserAuthUserCaseGateway = GetUserAuthenticatedUseCaseGatewayImpl(userAuthenticator: userAutenticator)
         
-        let getUserAuthUseCase = GetUserAuthenticatedUseCaseImpl(
-            getUserAuthenticatedGateway: getUserAuthUserCaseGateway)
+        let getUserAuthUseCase = GetUserAuthenticatedUseCaseImpl(getUserAuthenticatedGateway: getUserAuthUserCaseGateway)
         
-        let getUserAuthController = GetUserAuthenticatedControllerImpl(
-            getUserAuthUseCase: getUserAuthUseCase)
+        let getUserAuthController = GetUserAuthenticatedControllerImpl(getUserAuthUseCase: getUserAuthUseCase)
         
         return try await getUserAuthController.getUserAuth()
     }
