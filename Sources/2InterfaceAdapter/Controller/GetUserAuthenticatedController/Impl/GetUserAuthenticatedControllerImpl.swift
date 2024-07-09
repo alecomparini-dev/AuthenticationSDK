@@ -16,7 +16,7 @@ public class GetUserAuthenticatedControllerImpl: GetUserAuthenticatedController 
     
     public func getUserAuth() async throws -> String? {
         let outputDTO = try await getUserAuthUseCase.getUser()
-        return outputDTO.userIDAuth
+        return outputDTO.userID
     }
 
     

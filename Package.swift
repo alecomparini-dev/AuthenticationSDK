@@ -15,7 +15,7 @@ let package = Package(
     ],
     
     dependencies: [
-        .package(url: "https://github.com/firebase/firebase-ios-sdk.git", .upToNextMajor(from: "10.18.0"))
+        .package(url: "https://github.com/firebase/firebase-ios-sdk.git", .upToNextMajor(from: "10.28.0"))
     ],
 
     
@@ -48,14 +48,50 @@ let package = Package(
         
 //MARK: - DETAIL
         .target(
-            name: "AuthProvider",
+            name: "AuthSignIn",
             dependencies: [
                 "AuthUseCaseGateway",
                 .product(name: "FirebaseAuth", package: "firebase-ios-sdk")
             ],
-            path: "Sources/Detail/AuthenticationProvider"
+            path: "Sources/Detail/SingInProvider"
         ),
 
+        .target(
+            name: "AuthSignUp",
+            dependencies: [
+                "AuthUseCaseGateway",
+                .product(name: "FirebaseAuth", package: "firebase-ios-sdk")
+            ],
+            path: "Sources/Detail/SignUpProvider"
+        ),
+
+        .target(
+            name: "AuthLogout",
+            dependencies: [
+                "AuthUseCaseGateway",
+                .product(name: "FirebaseAuth", package: "firebase-ios-sdk")
+            ],
+            path: "Sources/Detail/LogoutProvider"
+        ),
+
+        .target(
+            name: "AuthUserInfo",
+            dependencies: [
+                "AuthUseCaseGateway",
+                .product(name: "FirebaseAuth", package: "firebase-ios-sdk")
+            ],
+            path: "Sources/Detail/UserAuthInfoProvider"
+        ),
+        
+        .target(
+            name: "AuthResetPass",
+            dependencies: [
+                "AuthUseCaseGateway",
+                .product(name: "FirebaseAuth", package: "firebase-ios-sdk")
+            ],
+            path: "Sources/Detail/ResetPassProvider"
+        ),
+        
         .target(
             name: "AuthLocal",
             dependencies: [
@@ -72,7 +108,8 @@ let package = Package(
             name: "AuthenticationSDKMain",
             dependencies: [
                 "AuthController",
-                "AuthProvider",
+                "AuthSignIn",
+                "AuthUserInfo",
                 "AuthLocal"
             ],
             path: "Sources/Main"

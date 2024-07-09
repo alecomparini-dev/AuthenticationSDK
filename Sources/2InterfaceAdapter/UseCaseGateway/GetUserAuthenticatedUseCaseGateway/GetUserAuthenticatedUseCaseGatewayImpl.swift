@@ -7,17 +7,17 @@ import AuthDomain
 
 public class GetUserAuthenticatedUseCaseGatewayImpl: GetUserAuthenticatedUseCaseGateway {
     
-    private let userAuthenticator: UserAuthenticated
+    private let userAuthenticator: UserAuthInfo
     
-    public init(userAuthenticator: UserAuthenticated) {
+    public init(userAuthenticator: UserAuthInfo) {
         self.userAuthenticator = userAuthenticator
     }
     
-    public func getUser() async throws -> UserAuthenticatedUseCaseModel {
+    public func getUser() throws -> UserAuthInfoUseCaseDTO {
         
-        let userAuth: UserAuthenticatedGatewayDTO = try userAuthenticator.getUserIDAuthenticated()
+        let userAuth: UserAuthInfoGatewayDTO = try userAuthenticator.getInfo()
                
-        return UserAuthenticatedUseCaseModel(userIDAuth: userAuth.userID)
+        return UserAuthInfoUseCaseDTO(userID: userAuth.userID)
     }
     
     

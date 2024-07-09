@@ -5,5 +5,5 @@ import Foundation
 
 
 public protocol GetUserAuthenticatedUseCaseGateway {
-    func getUser() async throws -> UserAuthenticatedUseCaseModel
+    func getUser() throws -> UserAuthInfoUseCaseDTO
 }

@@ -4,7 +4,7 @@
 import Foundation
 
 
-public enum AuthenticationDomainError: Error {
+public enum SignInDomainError: Error {
     case emailAlready
     case emailInvalid
     case passwordInvalid

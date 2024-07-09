@@ -11,11 +11,11 @@ public class GetUserAuthenticatedUseCaseImpl: GetUserAuthenticatedUseCase {
         self.getUserAuthenticatedGateway = getUserAuthenticatedGateway
     }
     
-    public func getUser() async throws -> UserAuthenticatedUseCaseDTO.Output {
+    public func getUser() async throws -> UserAuthInfoUseCaseDTO {
         
-        let userAuth: UserAuthenticatedUseCaseModel = try await getUserAuthenticatedGateway.getUser()
+        let userAuth: UserAuthInfoUseCaseDTO = try await getUserAuthenticatedGateway.getUser()
         
-        return UserAuthenticatedUseCaseDTO.Output(userIDAuth: userAuth.userIDAuth )
+        return UserAuthInfoUseCaseDTO(userID: userAuth.userID )
     }
 
     
