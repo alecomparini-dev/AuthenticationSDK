@@ -25,10 +25,10 @@ public class FirebaseSignUpEmailPassProvider: SignUpProvider {
             
             auth.createUser(withEmail: email, password: pass) { [weak self] result, error in
                 
-                guard let self else {return continuation.resume(throwing: SignInError(code: .errorAuthentication))}
+                guard let self else {return continuation.resume(throwing: SignInError(code: .errorSignIn))}
                 
                 if let error = error as? NSError {
-                    return continuation.resume(throwing: SignInError(code: .errorAuthentication))
+                    return continuation.resume(throwing: SignInError(code: .errorSignIn))
                 }
                 
             }
