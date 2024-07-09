@@ -10,5 +10,5 @@ public enum SignInDomainError: Error {
     case passwordInvalid
     case userOrPasswordInvalid
     case userNotAuthenticated
-    case errorAuthentication
+    case errorSignIn
 }

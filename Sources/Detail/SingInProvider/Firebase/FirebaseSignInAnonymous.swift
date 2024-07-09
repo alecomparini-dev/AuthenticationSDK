@@ -22,12 +22,12 @@ public class FirebaseSignInAnonymous: SignInProvider {
             auth.signInAnonymously() { result , error  in
                 
                 if error != nil {
-                    continuation.resume(throwing: SignInError(code: .errorAuthentication))
+                    continuation.resume(throwing: SignInError(code: .errorSignIn))
                     return
                 }
                 
                 guard let userID = result?.user.uid else {
-                    continuation.resume(throwing: SignInError(code: .errorAuthentication))
+                    continuation.resume(throwing: SignInError(code: .errorSignIn))
                     return
                 }
                 
