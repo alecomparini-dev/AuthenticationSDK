@@ -9,11 +9,10 @@ public class SignInAnonymousValidation: SignInValidation {
     
     public func validate(userAuthInfo: UserAuthInfoUseCaseDTO) throws {
         
-        if isUserAuthAnonymous(userAuthInfo) {
+        if !isUserAuthAnonymous(userAuthInfo) {
             throw SignInDomainError.errorSignIn
         }
         
     }
-
     
 }
