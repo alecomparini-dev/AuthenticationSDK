@@ -5,7 +5,7 @@ import Foundation
 
 import AuthUseCaseGateway
 import FirebaseAuth
-import AuthValidation
+
 
 public class FirebaseSignInEmailPass: SignInProvider {
 
