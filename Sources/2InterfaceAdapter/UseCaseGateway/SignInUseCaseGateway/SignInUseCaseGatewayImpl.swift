@@ -17,11 +17,11 @@ public class SignInUseCaseGatewayImpl: SignInUseCaseGateway {
     
     public func signIn() async throws -> UserAuthInfoUseCaseDTO {
         
-        let userAuth = try await signInProvider.signIn()
+        let userAuthGateway = try await signInProvider.signIn()
         
-        //MAPPER
+        let userAuthUseCase = UserAuthInfoGatewayMapper().toUserAuthInfoUseCase(userAuthGateway)
         
-        return UserAuthInfoUseCaseDTO(userID: userAuth.userID)
+        return userAuthUseCase
     }
     
     

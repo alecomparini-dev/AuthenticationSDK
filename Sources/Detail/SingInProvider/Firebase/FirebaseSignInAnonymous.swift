@@ -3,7 +3,9 @@
 
 import Foundation
 
+import AuthDomain
 import AuthUseCaseGateway
+import AuthValidation
 import FirebaseAuth
 
 public class FirebaseSignInAnonymous: SignInProvider {
@@ -31,7 +33,12 @@ public class FirebaseSignInAnonymous: SignInProvider {
                     return
                 }
                 
-                continuation.resume(returning: UserAuthInfoGatewayDTO(userID: userID, isAnonymous: true))
+                let userAuth = UserAuthInfoGatewayDTO (
+                    userID: userID,
+                    isAnonymous: result?.user.isAnonymous
+                )
+                
+                continuation.resume(returning: userAuth)
             }
         }
     }
