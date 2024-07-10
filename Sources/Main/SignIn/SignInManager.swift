@@ -3,9 +3,8 @@
 
 
 import AuthController
-import AuthSignIn
 import AuthUseCaseGateway
-
+import AuthSignIn
 
 public class SignInManager {
         

@@ -19,9 +19,11 @@ let package = Package(
     ],
 
     
+    
     targets: [
         
-//MARK: - DOMAIN
+//MARK: - DOMAIN -
+        
         .target(
             name: "AuthDomain",
             dependencies: [],
@@ -33,40 +35,36 @@ let package = Package(
         
         
         
-//MARK: - INTERFACE ADAPTER LAYER
+//MARK: - INTERFACE ADAPTER LAYER -
+        
         .target(
             name: "AuthUseCaseGateway",
-            dependencies: ["AuthDomain"],
-            path: "Sources/2InterfaceAdapter/UseCaseGateway",
-            swiftSettings: [
-                .unsafeFlags(["-enable-library-evolution"], .when(configuration: .release))
-            ]
+            dependencies: [
+                "AuthDomain"
+            ],
+            path: "Sources/2InterfaceAdapter/UseCaseGateway"
         ),
 
-        
         .target(
             name: "AuthController",
-            dependencies: ["AuthDomain"],
-            path: "Sources/2InterfaceAdapter/Controller",
-            swiftSettings: [
-                .unsafeFlags(["-enable-library-evolution"], .when(configuration: .release))
-            ]
+            dependencies: [
+                "AuthDomain"
+            ],
+            path: "Sources/2InterfaceAdapter/Controller"
         ),
 
         
         
-//MARK: - DETAIL
+//MARK: - DETAIL -
+        
         .target(
             name: "AuthSignIn",
             dependencies: [
-                "AuthValidation",
                 "AuthUseCaseGateway",
+                "AuthController",
                 .product(name: "FirebaseAuth", package: "firebase-ios-sdk")
             ],
-            path: "Sources/Detail/SingInProvider",
-            swiftSettings: [
-                .unsafeFlags(["-enable-library-evolution"], .when(configuration: .release))
-            ]
+            path: "Sources/Detail/SingInProvider"
         ),
 
         .target(
@@ -75,10 +73,7 @@ let package = Package(
                 "AuthUseCaseGateway",
                 .product(name: "FirebaseAuth", package: "firebase-ios-sdk")
             ],
-            path: "Sources/Detail/SignUpProvider",
-            swiftSettings: [
-                .unsafeFlags(["-enable-library-evolution"], .when(configuration: .release))
-            ]
+            path: "Sources/Detail/SignUpProvider"
         ),
 
         .target(
@@ -87,10 +82,7 @@ let package = Package(
                 "AuthUseCaseGateway",
                 .product(name: "FirebaseAuth", package: "firebase-ios-sdk")
             ],
-            path: "Sources/Detail/LogoutProvider",
-            swiftSettings: [
-                .unsafeFlags(["-enable-library-evolution"], .when(configuration: .release))
-            ]
+            path: "Sources/Detail/LogoutProvider"
         ),
 
         .target(
@@ -99,10 +91,7 @@ let package = Package(
                 "AuthUseCaseGateway",
                 .product(name: "FirebaseAuth", package: "firebase-ios-sdk")
             ],
-            path: "Sources/Detail/UserAuthInfoProvider",
-            swiftSettings: [
-                .unsafeFlags(["-enable-library-evolution"], .when(configuration: .release))
-            ]
+            path: "Sources/Detail/UserAuthInfoProvider"
         ),
         
         .target(
@@ -111,10 +100,7 @@ let package = Package(
                 "AuthUseCaseGateway",
                 .product(name: "FirebaseAuth", package: "firebase-ios-sdk")
             ],
-            path: "Sources/Detail/ResetPassProvider",
-            swiftSettings: [
-                .unsafeFlags(["-enable-library-evolution"], .when(configuration: .release))
-            ]
+            path: "Sources/Detail/ResetPassProvider"
         ),
         
         .target(
@@ -123,10 +109,7 @@ let package = Package(
                 "AuthDomain",
                 "AuthUseCaseGateway"
             ],
-            path: "Sources/Detail/Validation",
-            swiftSettings: [
-                .unsafeFlags(["-enable-library-evolution"], .when(configuration: .release))
-            ]
+            path: "Sources/Detail/Validation"
         ),
         
         .target(
@@ -135,20 +118,18 @@ let package = Package(
                 "AuthUseCaseGateway",
                 "AuthDomain"
             ],
-            path: "Sources/Detail/LocalAuthentication",
-            swiftSettings: [
-                .unsafeFlags(["-enable-library-evolution"], .when(configuration: .release))
-            ]
+            path: "Sources/Detail/LocalAuthentication"
             
         ),
 
         
         
-//  MARK: - MAIN LAYER
+//  MARK: - MAIN LAYER -
+        
         .target(
             name: "AuthenticationSDKMain",
             dependencies: [
-                "AuthUserInfo"
+                "AuthSignIn"
             ],
             path: "Sources/Main",
             swiftSettings: [
