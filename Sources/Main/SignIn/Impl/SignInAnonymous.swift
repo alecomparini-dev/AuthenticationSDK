@@ -14,7 +14,7 @@ class SignInAnonymous: SignInProtocol {
         self.signInAnonymousProvider = signInAnonymousProvider
     }
     
-    func signIn() async throws -> UserAuthInfoControllerDTO? {
+    func signIn() async throws -> UserAuthInfoControllerDTO {
         
         let signInGateway = SignInUseCaseGatewayImpl(signInProvider: signInAnonymousProvider)
         
