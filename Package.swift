@@ -148,10 +148,7 @@ let package = Package(
         .target(
             name: "AuthenticationSDKMain",
             dependencies: [
-                "AuthController",
-                "AuthSignIn",
-                "AuthUserInfo",
-                "AuthLocal"
+                "AuthUserInfo"
             ],
             path: "Sources/Main",
             swiftSettings: [

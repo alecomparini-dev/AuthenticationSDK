@@ -7,11 +7,10 @@ public struct UserAuthInfoControllerDTO {
     public let userID: String
     public let email: String?
     public let phoneNumber: String?
-    public var isEmailVerified: Bool?
-    public var displayName: String?
-    public var photoURL: String?
+    public let isEmailVerified: Bool?
+    public let displayName: String?
+    public let photoURL: String?
 
-    
     public init(userID: String,
                 email: String? = nil,
                 phoneNumber: String? = nil,
