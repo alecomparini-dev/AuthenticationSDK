@@ -17,7 +17,6 @@ public class SignInEmailPassValidation: SignInValidation {
             throw SignInDomainError.errorSignIn
         }
         
-        
     }
 
     
