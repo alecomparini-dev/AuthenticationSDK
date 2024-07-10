@@ -122,7 +122,10 @@ let package = Package(
                 "AuthUserInfo",
                 "AuthLocal"
             ],
-            path: "Sources/Main"
+            path: "Sources/Main",
+            swiftSettings: [
+                .unsafeFlags(["-enable-library-evolution"], .when(configuration: .release))
+            ]
         ),
         
 
