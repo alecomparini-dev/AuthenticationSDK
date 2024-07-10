@@ -60,7 +60,6 @@ let package = Package(
         .target(
             name: "AuthSignIn",
             dependencies: [
-                "AuthUseCaseGateway",
                 "AuthController",
                 .product(name: "FirebaseAuth", package: "firebase-ios-sdk")
             ],
@@ -70,7 +69,7 @@ let package = Package(
         .target(
             name: "AuthSignUp",
             dependencies: [
-                "AuthUseCaseGateway",
+                "AuthController",
                 .product(name: "FirebaseAuth", package: "firebase-ios-sdk")
             ],
             path: "Sources/Detail/SignUpProvider"
@@ -79,7 +78,7 @@ let package = Package(
         .target(
             name: "AuthLogout",
             dependencies: [
-                "AuthUseCaseGateway",
+                "AuthController",
                 .product(name: "FirebaseAuth", package: "firebase-ios-sdk")
             ],
             path: "Sources/Detail/LogoutProvider"
@@ -88,7 +87,7 @@ let package = Package(
         .target(
             name: "AuthUserInfo",
             dependencies: [
-                "AuthUseCaseGateway",
+                "AuthController",
                 .product(name: "FirebaseAuth", package: "firebase-ios-sdk")
             ],
             path: "Sources/Detail/UserAuthInfoProvider"
@@ -97,7 +96,7 @@ let package = Package(
         .target(
             name: "AuthResetPass",
             dependencies: [
-                "AuthUseCaseGateway",
+                "AuthController",
                 .product(name: "FirebaseAuth", package: "firebase-ios-sdk")
             ],
             path: "Sources/Detail/ResetPassProvider"
@@ -107,7 +106,7 @@ let package = Package(
             name: "AuthValidation",
             dependencies: [ 
                 "AuthDomain",
-                "AuthUseCaseGateway"
+                "AuthController"
             ],
             path: "Sources/Detail/Validation"
         ),
@@ -115,8 +114,8 @@ let package = Package(
         .target(
             name: "AuthLocal",
             dependencies: [
-                "AuthUseCaseGateway",
-                "AuthDomain"
+                "AuthDomain",
+                "AuthController",
             ],
             path: "Sources/Detail/LocalAuthentication"
             
@@ -129,7 +128,9 @@ let package = Package(
         .target(
             name: "AuthenticationSDKMain",
             dependencies: [
-                "AuthSignIn"
+                "AuthUseCaseGateway",
+                "AuthSignIn",
+                "AuthValidation",
             ],
             path: "Sources/Main",
             swiftSettings: [

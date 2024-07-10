@@ -5,7 +5,6 @@ import Foundation
 
 import AuthDomain
 import AuthUseCaseGateway
-import AuthValidation
 import FirebaseAuth
 
 public class FirebaseSignInAnonymous: SignInProvider {
