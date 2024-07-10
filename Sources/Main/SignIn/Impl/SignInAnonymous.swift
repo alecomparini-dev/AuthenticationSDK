@@ -4,6 +4,7 @@
 import AuthDomain
 import AuthController
 import AuthUseCaseGateway
+import AuthValidation
 
 class SignInAnonymous: SignInProtocol {
     
@@ -15,11 +16,11 @@ class SignInAnonymous: SignInProtocol {
     
     func signIn() async throws -> UserAuthInfoControllerDTO? {
         
-        let signInAnonymous = signInAnonymousProvider
+        let signInGateway = SignInUseCaseGatewayImpl(signInProvider: signInAnonymousProvider)
         
-        let signInGateway = SignInUseCaseGatewayImpl(signInProvider: signInAnonymous)
+        let signInValidation = SignInAnonymousValidation()
         
-        let signInUseCase = SignInUseCaseImpl(signInGateway: signInGateway)
+        let signInUseCase = SignInUseCaseImpl(signInGateway: signInGateway, signInValidation: signInValidation)
         
         let signInController = SignInControllerImpl(signInUseCase: signInUseCase)
         

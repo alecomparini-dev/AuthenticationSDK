@@ -50,6 +50,7 @@ let package = Package(
         .target(
             name: "AuthSignIn",
             dependencies: [
+                "AuthValidation",
                 "AuthUseCaseGateway",
                 .product(name: "FirebaseAuth", package: "firebase-ios-sdk")
             ],
@@ -90,6 +91,15 @@ let package = Package(
                 .product(name: "FirebaseAuth", package: "firebase-ios-sdk")
             ],
             path: "Sources/Detail/ResetPassProvider"
+        ),
+        
+        .target(
+            name: "AuthValidation",
+            dependencies: [ 
+                "AuthDomain",
+                "AuthUseCaseGateway"
+            ],
+            path: "Sources/Detail/Validation"
         ),
         
         .target(

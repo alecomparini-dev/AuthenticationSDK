@@ -5,6 +5,7 @@
 import AuthDomain
 import AuthController
 import AuthUseCaseGateway
+import AuthValidation
 
 
 class SignInEmailPass: SignInProtocol {
@@ -17,11 +18,11 @@ class SignInEmailPass: SignInProtocol {
     
     func signIn() async throws -> UserAuthInfoControllerDTO? {
         
-        let signInProvedor = signInEmailPassProvider
+        let signInGateway = SignInUseCaseGatewayImpl(signInProvider: signInEmailPassProvider)
         
-        let signInGateway = SignInUseCaseGatewayImpl(signInProvider: signInProvedor)
+        let signInValidation = SignInEmailPassValidation()
         
-        let signInUseCase = SignInUseCaseImpl(signInGateway: signInGateway)
+        let signInUseCase = SignInUseCaseImpl(signInGateway: signInGateway, signInValidation: signInValidation)
         
         let signInController = SignInControllerImpl(signInUseCase: signInUseCase)
         

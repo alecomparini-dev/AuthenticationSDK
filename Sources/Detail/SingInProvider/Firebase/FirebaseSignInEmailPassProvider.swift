@@ -3,9 +3,9 @@
 
 import Foundation
 
-import AuthDomain
 import AuthUseCaseGateway
 import FirebaseAuth
+import AuthValidation
 
 public class FirebaseSignInEmailPass: SignInProvider {
 
@@ -25,23 +25,23 @@ public class FirebaseSignInEmailPass: SignInProvider {
         return try await withCheckedThrowingContinuation { continuation in
             
             auth.signIn(withEmail: email, password: pass) { [weak self] result, error in
+                guard let self else {return continuation.resume(throwing: SignInError(code: .errorSignIn) ) }
                 
-                guard let self else {return}
+                guard let result else { return continuation.resume(throwing: SignInError(code: .errorSignIn)) }
                 
                 if let error = error as? NSError {
                     return continuation.resume(throwing: makeAuthenticationError(error))
                 }
                 
-                guard let userID = result?.user.uid else { return continuation.resume(throwing: SignInError(code: .userOrPasswordInvalid)) }
-                
-                continuation.resume(returning: UserAuthInfoGatewayDTO(userID: userID, 
-                                                                      email: result?.user.email,
-                                                                      isAnonymous: result?.user.isAnonymous,
-                                                                      isEmailVerified: result?.user.isEmailVerified
-                                                                     )
+                let userAuth = UserAuthInfoGatewayDTO (
+                    userID: result.user.uid,
+                    email: result.user.email,
+                    isAnonymous: result.user.isAnonymous,
+                    isEmailVerified: result.user.isEmailVerified
                 )
+                
+                continuation.resume(returning: userAuth)
             }
-            
         }
         
     }
