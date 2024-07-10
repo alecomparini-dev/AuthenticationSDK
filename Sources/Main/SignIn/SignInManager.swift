@@ -24,7 +24,6 @@ public class SignInManager {
         return try await signIn.signIn()
     }
     
-    
     public func appleID() -> UserAuthInfoControllerDTO? {
         return nil
     }
