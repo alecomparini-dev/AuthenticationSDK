@@ -16,7 +16,7 @@ class SignInEmailPass: SignInProtocol {
         self.signInEmailPassProvider = signInEmailPassProvider
     }
     
-    func signIn() async throws -> UserAuthInfoControllerDTO? {
+    func signIn() async throws -> UserAuthInfoControllerDTO {
         
         let signInGateway = SignInUseCaseGatewayImpl(signInProvider: signInEmailPassProvider)
         

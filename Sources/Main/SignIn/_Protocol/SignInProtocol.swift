@@ -5,5 +5,5 @@
 import AuthController
 
 protocol SignInProtocol {
-    func signIn() async throws -> UserAuthInfoControllerDTO?
+    func signIn() async throws -> UserAuthInfoControllerDTO
 }
