@@ -1,10 +1,10 @@
 //  Created by Alessandro Comparini on 08/07/24.
 //
 
-import AuthDomain
-import AuthController
-import AuthUseCaseGateway
-import AuthValidation
+import AuthenticationSDKDomain
+import AuthenticationSDKController
+import AuthenticationSDKUseCaseGateway
+import AuthenticationSDKValidation
 
 class SignInAnonymous: SignInProtocol {
     

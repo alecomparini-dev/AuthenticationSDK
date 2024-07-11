@@ -1,7 +1,7 @@
 //  Created by Alessandro Comparini on 09/07/24.
 //
 
-import AuthDomain
+import AuthenticationSDKDomain
 
 func isUserAuthAnonymous(_ userAuthInfo: UserAuthInfoUseCaseDTO) -> Bool  {
     

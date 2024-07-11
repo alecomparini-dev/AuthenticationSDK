@@ -2,7 +2,7 @@
 //  Created by Alessandro Comparini on 09/07/24.
 //
 
-import AuthDomain
+import AuthenticationSDKDomain
 
 public struct UserAuthInfoGatewayMapper {
     
@@ -18,4 +18,3 @@ public struct UserAuthInfoGatewayMapper {
     
     
 }
-

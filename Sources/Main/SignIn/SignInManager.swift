@@ -2,9 +2,9 @@
 //
 
 
-import AuthController
-import AuthUseCaseGateway
-import AuthSignIn
+import AuthenticationSDKController
+import AuthenticationSDKUseCaseGateway
+import AuthenticationSDKSingInProvider
 
 public class SignInManager {
         

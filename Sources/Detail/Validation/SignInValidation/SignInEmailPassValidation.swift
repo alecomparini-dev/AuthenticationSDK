@@ -1,7 +1,7 @@
 //  Created by Alessandro Comparini on 09/07/24.
 //
 
-import AuthDomain
+import AuthenticationSDKDomain
 
 public class SignInEmailPassValidation: SignInValidation {
     
@@ -19,5 +19,4 @@ public class SignInEmailPassValidation: SignInValidation {
         
     }
 
-    
 }

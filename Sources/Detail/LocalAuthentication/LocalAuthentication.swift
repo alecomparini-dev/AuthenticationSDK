@@ -4,8 +4,8 @@
 import Foundation
 
 import LocalAuthentication
-import AuthUseCaseGateway
-import AuthDomain
+import AuthenticationSDKUseCaseGateway
+import AuthenticationSDKDomain
 
 
 public class LocalAuthentication  {

@@ -3,8 +3,7 @@
 
 import Foundation
 
-import AuthDomain
-import AuthUseCaseGateway
+import AuthenticationSDKUseCaseGateway
 import FirebaseAuth
 
 public class FirebaseSignInAnonymous: SignInProvider {

@@ -1,9 +1,7 @@
 //  Created by Alessandro Comparini on 18/10/23.
 //
 
-import Foundation
-
-import AuthDomain
+import AuthenticationSDKDomain
 
 public class GetUserAuthenticatedUseCaseGatewayImpl: GetUserAuthenticatedUseCaseGateway {
     
@@ -19,6 +17,5 @@ public class GetUserAuthenticatedUseCaseGatewayImpl: GetUserAuthenticatedUseCase
                
         return UserAuthInfoUseCaseDTO(userID: userAuth.userID)
     }
-    
     
 }

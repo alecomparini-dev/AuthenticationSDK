@@ -1,7 +1,7 @@
 //  Created by Alessandro Comparini on 08/07/24.
 //
 
-import AuthDomain
+import AuthenticationSDKDomain
 
 public class SignInControllerImpl: SignInController {
     

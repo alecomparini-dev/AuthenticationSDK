@@ -1,7 +1,7 @@
 //  Created by Alessandro Comparini on 17/11/23.
 //
 
-import AuthSignIn
+import AuthenticationSDKSingInProvider
 
 public class AuthenticationMain {
     
@@ -10,7 +10,6 @@ public class AuthenticationMain {
     public init() {
         self.signIn = SignInManager()
     }
-    
     
 }
 

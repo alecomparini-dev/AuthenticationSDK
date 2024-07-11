@@ -2,7 +2,7 @@
 //  Created by Alessandro Comparini on 08/07/24.
 //
 
-import AuthController
+import AuthenticationSDKController
 
 protocol SignInProtocol {
     func signIn() async throws -> UserAuthInfoControllerDTO
