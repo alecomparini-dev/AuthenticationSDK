@@ -1,10 +1,8 @@
 //  Created by Alessandro Comparini on 18/10/23.
 //
 
-import Foundation
-
+import AuthenticationSDKUseCaseGateway
 import FirebaseAuth
-import AuthUseCaseGateway
 
 public class FirebaseUserAuthInfo: UserAuthInfo {
     

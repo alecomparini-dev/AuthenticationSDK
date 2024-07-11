@@ -1,9 +1,7 @@
 //  Created by Alessandro Comparini on 31/10/23.
 //
 
-import Foundation
-
-import AuthDomain
+import AuthenticationSDKDomain
 
 public class ResetPasswordUseCaseGatewayImpl: ResetPasswordUseCaseGateway {
 

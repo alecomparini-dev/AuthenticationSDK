@@ -1,9 +1,7 @@
 //  Created by Alessandro Comparini on 15/09/23.
 //
 
-import Foundation
-
-import AuthDomain
+import AuthenticationSDKDomain
 
 public struct SignInError: Error {
         

@@ -25,12 +25,9 @@ let package = Package(
 //MARK: - DOMAIN -
         
         .target(
-            name: "AuthDomain",
+            name: "AuthenticationSDKDomain",
             dependencies: [],
-            path: "Sources/1Domain",
-            swiftSettings: [
-                .unsafeFlags(["-enable-library-evolution"], .when(configuration: .release))
-            ]
+            path: "Sources/1Domain"
         ),
         
         
@@ -38,17 +35,17 @@ let package = Package(
 //MARK: - INTERFACE ADAPTER LAYER -
         
         .target(
-            name: "AuthUseCaseGateway",
+            name: "AuthenticationSDKUseCaseGateway",
             dependencies: [
-                "AuthDomain"
+                "AuthenticationSDKDomain"
             ],
             path: "Sources/2InterfaceAdapter/UseCaseGateway"
         ),
 
         .target(
-            name: "AuthController",
+            name: "AuthenticationSDKController",
             dependencies: [
-                "AuthDomain"
+                "AuthenticationSDKDomain"
             ],
             path: "Sources/2InterfaceAdapter/Controller"
         ),
@@ -58,67 +55,66 @@ let package = Package(
 //MARK: - DETAIL -
         
         .target(
-            name: "AuthSignIn",
+            name: "AuthenticationSDKSingInProvider",
             dependencies: [
-                "AuthController",
+                "AuthenticationSDKController",
                 .product(name: "FirebaseAuth", package: "firebase-ios-sdk")
             ],
             path: "Sources/Detail/SingInProvider"
         ),
 
         .target(
-            name: "AuthSignUp",
+            name: "AuthenticationSDKSingInProviderSignUpProvider",
             dependencies: [
-                "AuthController",
+                "AuthenticationSDKController",
                 .product(name: "FirebaseAuth", package: "firebase-ios-sdk")
             ],
             path: "Sources/Detail/SignUpProvider"
         ),
 
         .target(
-            name: "AuthLogout",
+            name: "AuthenticationSDKLogoutProvider",
             dependencies: [
-                "AuthController",
+                "AuthenticationSDKController",
                 .product(name: "FirebaseAuth", package: "firebase-ios-sdk")
             ],
             path: "Sources/Detail/LogoutProvider"
         ),
 
         .target(
-            name: "AuthUserInfo",
+            name: "AuthenticationSDKUserAuthInfoProvider",
             dependencies: [
-                "AuthController",
+                "AuthenticationSDKUseCaseGateway",
+                "AuthenticationSDKController",
                 .product(name: "FirebaseAuth", package: "firebase-ios-sdk")
             ],
             path: "Sources/Detail/UserAuthInfoProvider"
         ),
         
         .target(
-            name: "AuthResetPass",
+            name: "AuthenticationSDKResetPassProvider",
             dependencies: [
-                "AuthController",
+                "AuthenticationSDKController",
                 .product(name: "FirebaseAuth", package: "firebase-ios-sdk")
             ],
             path: "Sources/Detail/ResetPassProvider"
         ),
         
         .target(
-            name: "AuthValidation",
-            dependencies: [ 
-                "AuthDomain",
-                "AuthController"
+            name: "AuthenticationSDKValidation",
+            dependencies: [
+                "AuthenticationSDKDomain"
             ],
             path: "Sources/Detail/Validation"
         ),
         
         .target(
-            name: "AuthLocal",
+            name: "AuthenticationSDKLocal",
             dependencies: [
-                "AuthDomain",
-                "AuthController",
+                "AuthenticationSDKDomain",
+                "AuthenticationSDKController",
             ],
             path: "Sources/Detail/LocalAuthentication"
-            
         ),
 
         
@@ -128,9 +124,10 @@ let package = Package(
         .target(
             name: "AuthenticationSDKMain",
             dependencies: [
-                "AuthUseCaseGateway",
-                "AuthSignIn",
-                "AuthValidation",
+                "AuthenticationSDKUseCaseGateway",
+                "AuthenticationSDKSingInProvider",
+                "AuthenticationSDKController",
+                "AuthenticationSDKValidation",
             ],
             path: "Sources/Main",
             swiftSettings: [

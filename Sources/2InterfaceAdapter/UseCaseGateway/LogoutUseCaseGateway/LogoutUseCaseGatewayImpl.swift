@@ -1,9 +1,7 @@
 //  Created by Alessandro Comparini on 01/11/23.
 //
 
-import Foundation
-
-import AuthDomain
+import AuthenticationSDKDomain
 
 public class LogoutUseCaseGatewayImpl: LogoutUseCaseGateway {
     

@@ -1,9 +1,7 @@
 //  Created by Alessandro Comparini on 03/11/23.
 //
 
-import Foundation
-
-import AuthDomain
+import AuthenticationSDKDomain
 
 public class CheckBiometryUseCaseGatewayImpl: CheckBiometryUseCaseGateway {
     

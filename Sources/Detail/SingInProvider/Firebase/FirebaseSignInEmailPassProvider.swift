@@ -3,7 +3,7 @@
 
 import Foundation
 
-import AuthUseCaseGateway
+import AuthenticationSDKUseCaseGateway
 import FirebaseAuth
 
 

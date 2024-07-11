@@ -3,7 +3,7 @@
 
 import Foundation
 import FirebaseAuth
-import AuthUseCaseGateway
+import AuthenticationSDKUseCaseGateway
 
 public class FirebaseLogout: Logout {
     

@@ -1,8 +1,7 @@
 //  Created by Alessandro Comparini on 02/11/23.
 //
 
-import Foundation
-import AuthDomain
+import AuthenticationSDKDomain
 
 public struct BiometryAuthenticationGatewayDTO {
     public var biometryTypes: BiometryTypes?

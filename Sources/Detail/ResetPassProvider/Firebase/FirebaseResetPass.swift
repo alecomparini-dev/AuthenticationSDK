@@ -4,7 +4,7 @@
 import Foundation
 
 import FirebaseAuth
-import AuthUseCaseGateway
+import AuthenticationSDKUseCaseGateway
 
 public class FirebaseResetPass: ResetPassword {
     private let auth: Auth
