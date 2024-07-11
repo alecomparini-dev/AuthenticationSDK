@@ -3,7 +3,7 @@
 
 import AuthenticationSDKSingInProvider
 
-public class AuthenticationMain {
+public class AuthenticationSDKMain {
     
     public private(set) var signIn: SignInManager
     
