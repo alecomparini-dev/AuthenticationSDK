@@ -16,7 +16,11 @@ public class SignInControllerImpl: SignInController {
         
         let userAuthInfoUseCaseDTO = try await signInUseCase.signIn()
         
-        let userAuthControllerDTO = UserAuthInfoControllerDTO(userID: userAuthInfoUseCaseDTO.userID)
+        let userAuthControllerDTO = UserAuthInfoControllerDTO(userID: userAuthInfoUseCaseDTO.userID,
+                                                              email: userAuthInfoUseCaseDTO.email,
+                                                              displayName: userAuthInfoUseCaseDTO.displayName,
+                                                              photoURL: userAuthInfoUseCaseDTO.photoURL
+        )
         
         return userAuthControllerDTO
     }
