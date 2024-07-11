@@ -5,11 +5,12 @@ import AuthenticationSDKDomain
 
 func isUserAuthEmailVerified(_ userAuthInfo: UserAuthInfoUseCaseDTO) -> Bool  {
     
-    guard let email = userAuthInfo.email, email.isEmpty else { return false }
+    guard let email = userAuthInfo.email,
+          let isEmailVerified = userAuthInfo.isEmailVerified else { return false }
     
-    if let isEmailVerified = userAuthInfo.isEmailVerified, !isEmailVerified {
-        return false
-    }
+    if email.isEmpty { return false }
+    
+    if !isEmailVerified { return false }
     
     return true
 }
