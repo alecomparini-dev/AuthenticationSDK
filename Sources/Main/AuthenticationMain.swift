@@ -11,9 +11,9 @@ public class AuthenticationSDKMain {
     
 //  MARK: - GET PROPERTIES
     
-    var signIn: SignInManager { SignInManager() }
+    public var signIn: SignInManager { SignInManager() }
     
-    var signUp: SignUpManager { SignUpManager() }
+    public var signUp: SignUpManager { SignUpManager() }
     
 }
 
