@@ -15,12 +15,9 @@ public class SignInUseCaseGatewayImpl: SignInUseCaseGateway {
 //  MARK: - PUBLIC AREA
     
     public func signIn() async throws -> UserAuthInfoUseCaseDTO {
-        
         let userAuthGateway = try await signInProvider.signIn()
         
-        let userAuthUseCase = UserAuthInfoGatewayMapper().toUserAuthInfoUseCase(userAuthGateway)
-        
-        return userAuthUseCase
+        return UserAuthInfoGatewayMapper().toUserAuthInfoUseCase(userAuthGateway)
     }
     
     
