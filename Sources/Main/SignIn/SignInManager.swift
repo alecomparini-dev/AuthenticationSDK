@@ -4,7 +4,7 @@
 import AuthenticationSDKDomain
 import AuthenticationSDKController
 import AuthenticationSDKUseCaseGateway
-import AuthenticationSDKSingInProvider
+import AuthenticationSDKSignInProvider
 
 public class SignInManager {
         

@@ -55,16 +55,16 @@ let package = Package(
 //MARK: - DETAIL -
         
         .target(
-            name: "AuthenticationSDKSingInProvider",
+            name: "AuthenticationSDKSignInProvider",
             dependencies: [
                 "AuthenticationSDKController",
                 .product(name: "FirebaseAuth", package: "firebase-ios-sdk")
             ],
-            path: "Sources/Detail/SingInProvider"
+            path: "Sources/Detail/SignInProvider"
         ),
 
         .target(
-            name: "AuthenticationSDKSingInProviderSignUpProvider",
+            name: "AuthenticationSDKSignUpProvider",
             dependencies: [
                 "AuthenticationSDKController",
                 .product(name: "FirebaseAuth", package: "firebase-ios-sdk")
@@ -125,7 +125,8 @@ let package = Package(
             name: "AuthenticationSDKMain",
             dependencies: [
                 "AuthenticationSDKUseCaseGateway",
-                "AuthenticationSDKSingInProvider",
+                "AuthenticationSDKSignInProvider",
+                "AuthenticationSDKSignUpProvider",
                 "AuthenticationSDKController",
                 "AuthenticationSDKValidation",
             ],

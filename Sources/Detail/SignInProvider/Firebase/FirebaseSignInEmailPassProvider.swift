@@ -1,14 +1,11 @@
 //  Created by Alessandro Comparini on 14/09/23.
 //
 
-import Foundation
-
 import AuthenticationSDKUseCaseGateway
 import FirebaseAuth
 
 
 public class FirebaseSignInEmailPass: SignInProvider {
-
     private let auth: Auth
     private let email: String
     private let pass: String
@@ -45,7 +42,6 @@ public class FirebaseSignInEmailPass: SignInProvider {
         }
         
     }
-
     
     
 //  MARK: - PRIVATE AREA

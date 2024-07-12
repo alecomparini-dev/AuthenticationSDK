@@ -1,15 +1,19 @@
 //  Created by Alessandro Comparini on 17/11/23.
 //
 
-import AuthenticationSDKSingInProvider
-
 public class AuthenticationSDKMain {
     
-    public private(set) var signIn: SignInManager
+    private var _signIn: SignInManager?
+    private var _signUp: SignUpManager?
     
-    public init() {
-        self.signIn = SignInManager()
-    }
+    public init() { }
+    
+    
+//  MARK: - GET PROPERTIES
+    
+    var signIn: SignInManager { SignInManager() }
+    
+    var signUp: SignUpManager { SignUpManager() }
     
 }
 
