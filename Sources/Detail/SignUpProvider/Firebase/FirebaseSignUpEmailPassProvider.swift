@@ -46,7 +46,7 @@ public class FirebaseSignUpEmailPassProvider: SignUpProvider {
     
 //  MARK: - PRIVATE AREA
     
-    private func linkAnonymousToEmailAuthProviderIfNeeded(email: String, password: String) async throws {
+    private func linkAnonymousToEmailAuthProviderIfNeeded(email: String, password: String) async throws  {
         
         return try await withCheckedThrowingContinuation { continuation in
         
@@ -54,13 +54,13 @@ public class FirebaseSignUpEmailPassProvider: SignUpProvider {
             
             guard let user = auth.currentUser else { return continuation.resume(throwing: SignInError(code: .errorSignIn)) }
             
-            if !user.isAnonymous { return }
+            if !user.isAnonymous { return continuation.resume(returning: () ) }
             
             user.link(with: credential) { result, error in
                 
                 if let _ = error as? NSError { return continuation.resume(throwing: SignInError(code: .errorSignIn)) }
                 
-                continuation.resume()
+                continuation.resume(returning: () )
             }
         }
     }
