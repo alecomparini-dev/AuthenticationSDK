@@ -58,9 +58,9 @@ public class FirebaseSignUpEmailPassProvider: SignUpProvider {
         return await withCheckedContinuation { continuation in
         
             user.link(with: credential) { result, error in
-                if let _ = error as? NSError { return }
+                if let _ = error as? NSError { return continuation.resume(returning: nil) }
                 
-                guard let result else { return }
+                guard let result else { return continuation.resume(returning: nil) }
                 
                 let userAuth = UserAuthInfoGatewayDTO (
                     userID: result.user.uid,
