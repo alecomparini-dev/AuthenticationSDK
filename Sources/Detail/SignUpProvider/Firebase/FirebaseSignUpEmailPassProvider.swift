@@ -17,6 +17,8 @@ public class FirebaseSignUpEmailPassProvider: SignUpProvider {
     
     public func signUp() async throws -> UserAuthInfoGatewayDTO {
         
+        let currentUser = auth.currentUser
+        
         let userAuth: UserAuthInfoGatewayDTO = try await withCheckedThrowingContinuation { continuation in
             
             auth.createUser(withEmail: email, password: pass) { result, error in
@@ -37,25 +39,24 @@ public class FirebaseSignUpEmailPassProvider: SignUpProvider {
                 continuation.resume(returning: userAuth)
             }
         }
+            
+        try await linkAnonymousToEmailAuthProviderIfNeeded(user: currentUser, email: email, password: pass)
         
-        try await linkAnonymousToEmailAuthProviderIfNeeded(email: email, password: pass)
-
         return userAuth
     }
     
     
 //  MARK: - PRIVATE AREA
     
-    private func linkAnonymousToEmailAuthProviderIfNeeded(email: String, password: String) async throws  {
+    private func linkAnonymousToEmailAuthProviderIfNeeded(user: User?, email: String, password: String) async throws  {
+        
+        guard let user, user.isAnonymous else {return}
         
         return try await withCheckedThrowingContinuation { continuation in
         
             let credential = EmailAuthProvider.credential(withEmail: email, password: password)
             
-            guard let user = auth.currentUser else { return continuation.resume(throwing: SignInError(code: .errorSignIn)) }
-            
             user.link(with: credential) { result, error in
-                
                 if let _ = error as? NSError { return continuation.resume(throwing: SignInError(code: .errorSignIn)) }
                 
                 continuation.resume(returning: () )
