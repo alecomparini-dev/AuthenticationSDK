@@ -54,8 +54,6 @@ public class FirebaseSignUpEmailPassProvider: SignUpProvider {
             
             guard let user = auth.currentUser else { return continuation.resume(throwing: SignInError(code: .errorSignIn)) }
             
-            if !user.isAnonymous { return continuation.resume(returning: () ) }
-            
             user.link(with: credential) { result, error in
                 
                 if let _ = error as? NSError { return continuation.resume(throwing: SignInError(code: .errorSignIn)) }
