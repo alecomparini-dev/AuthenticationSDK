@@ -14,7 +14,7 @@ public class FirebaseSignUpEmailPassProvider: SignUpProvider {
     
     public func signUp(email: String, pass: String) async throws -> UserAuthInfoGatewayDTO {
         
-        if let userAuth = await linkAnonymousToEmailAuthProviderIfNeeded(email: email, password: pass) {
+        if let userAuth = try await linkAnonymousToEmailAuthProviderIfNeeded(email: email, password: pass) {
             return userAuth
         }
         
@@ -44,20 +44,23 @@ public class FirebaseSignUpEmailPassProvider: SignUpProvider {
     
 //  MARK: - PRIVATE AREA
     
-    private func linkAnonymousToEmailAuthProviderIfNeeded(email: String, password: String) async -> UserAuthInfoGatewayDTO? {
+    private func linkAnonymousToEmailAuthProviderIfNeeded(email: String, password: String) async throws -> UserAuthInfoGatewayDTO? {
         
-        guard let user = auth.currentUser else { return nil }
+        guard let user = auth.currentUser else { throw SetDomainError(code: .userNotAuthenticated) }
         
         if !user.isAnonymous { return nil }
         
         let credential = EmailAuthProvider.credential(withEmail: email, password: password)
         
-        return await withCheckedContinuation { continuation in
+        return try await withCheckedThrowingContinuation { continuation in
         
             user.link(with: credential) { result, error in
-                if let _ = error as? NSError { return continuation.resume(returning: nil) }
                 
-                guard let result else { return continuation.resume(returning: nil) }
+                if let error = error as? NSError {
+                    return continuation.resume(throwing: firebaseToDomainErrorMapper(error))
+                }
+                
+                guard let result else { return  continuation.resume(throwing: SetDomainError(code: .internalError ) ) }
                 
                 let userAuth = UserAuthInfoGatewayDTO (
                     userID: result.user.uid,
