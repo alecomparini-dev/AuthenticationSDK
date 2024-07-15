@@ -2,7 +2,6 @@
 //
 
 import AuthenticationSDKUseCaseGateway
-import AuthenticationSDKErrorProvider
 import FirebaseAuth
 
 public class FirebaseSignUpEmailPassProvider: SignUpProvider {
@@ -60,7 +59,7 @@ public class FirebaseSignUpEmailPassProvider: SignUpProvider {
                     return continuation.resume(throwing: firebaseToDomainErrorMapper(error))
                 }
                 
-                guard let result else { return  continuation.resume(throwing: SetDomainError(code: .internalError ) ) }
+                guard let result else { return continuation.resume(throwing: SetDomainError(code: .unknownError("Firebase SignIn Result null."))) }
                 
                 let userAuth = UserAuthInfoGatewayDTO (
                     userID: result.user.uid,
@@ -73,6 +72,7 @@ public class FirebaseSignUpEmailPassProvider: SignUpProvider {
             }
         }
     }
+    
     
     
 }

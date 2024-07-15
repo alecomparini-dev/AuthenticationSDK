@@ -22,7 +22,7 @@ let package = Package(
     
     targets: [
         
-//MARK: - DOMAIN -
+        //MARK: - DOMAIN -
         
         .target(
             name: "AuthenticationSDKDomain",
@@ -32,7 +32,8 @@ let package = Package(
         
         
         
-//MARK: - INTERFACE ADAPTER LAYER -
+        
+        //MARK: - INTERFACE ADAPTER LAYER -
         
         .target(
             name: "AuthenticationSDKUseCaseGateway",
@@ -52,71 +53,8 @@ let package = Package(
 
         
         
-//MARK: - DETAIL -
         
-        .target(
-            name: "AuthenticationSDKSignInProvider",
-            dependencies: [
-                "AuthenticationSDKUseCaseGateway",
-                "AuthenticationSDKErrorProvider",
-                .product(name: "FirebaseAuth", package: "firebase-ios-sdk")
-            ],
-            path: "Sources/Detail/SignInProvider"
-        ),
-
-        .target(
-            name: "AuthenticationSDKSignUpProvider",
-            dependencies: [
-                "AuthenticationSDKUseCaseGateway",
-                "AuthenticationSDKErrorProvider",
-                .product(name: "FirebaseAuth", package: "firebase-ios-sdk")
-            ],
-            path: "Sources/Detail/SignUpProvider"
-        ),
-
-        .target(
-            name: "AuthenticationSDKLogoutProvider",
-            dependencies: [
-                .product(name: "FirebaseAuth", package: "firebase-ios-sdk")
-            ],
-            path: "Sources/Detail/LogoutProvider"
-        ),
-
-        .target(
-            name: "AuthenticationSDKUserAuthInfoProvider",
-            dependencies: [
-                "AuthenticationSDKUseCaseGateway",
-                .product(name: "FirebaseAuth", package: "firebase-ios-sdk")
-            ],
-            path: "Sources/Detail/UserAuthInfoProvider"
-        ),
-        
-        .target(
-            name: "AuthenticationSDKResetPassProvider",
-            dependencies: [
-                "AuthenticationSDKUseCaseGateway",
-                .product(name: "FirebaseAuth", package: "firebase-ios-sdk")
-            ],
-            path: "Sources/Detail/ResetPassProvider"
-        ),
-        
-        .target(
-            name: "AuthenticationSDKSendEmailVerificationProvider",
-            dependencies: [
-                "AuthenticationSDKUseCaseGateway",
-                "AuthenticationSDKErrorProvider",
-                .product(name: "FirebaseAuth", package: "firebase-ios-sdk")
-            ],
-            path: "Sources/Detail/SendEmailVerificationProvider"
-        ),
-        
-        .target(
-            name: "AuthenticationSDKValidation",
-            dependencies: [
-                "AuthenticationSDKDomain"
-            ],
-            path: "Sources/Detail/Validation"
-        ),
+        //MARK: - DETAIL -
         
         .target(
             name: "AuthenticationSDKLocal",
@@ -128,24 +66,32 @@ let package = Package(
         ),
     
         .target(
-            name: "AuthenticationSDKErrorProvider",
+            name: "AuthenticationSDKProviders",
             dependencies: [
                 "AuthenticationSDKUseCaseGateway",
                 .product(name: "FirebaseAuth", package: "firebase-ios-sdk")
             ],
-            path: "Sources/Detail/_ErrorProvider"
+            path: "Sources/Detail/Providers"
+        ),
+
+        .target(
+            name: "AuthenticationSDKValidation",
+            dependencies: [
+                "AuthenticationSDKDomain"
+            ],
+            path: "Sources/Detail/Validation"
         ),
 
         
+
         
-//  MARK: - MAIN LAYER -
+        //  MARK: - MAIN LAYER -
         
         .target(
             name: "AuthenticationSDKMain",
             dependencies: [
                 "AuthenticationSDKUseCaseGateway",
-                "AuthenticationSDKSignInProvider",
-                "AuthenticationSDKSignUpProvider",
+                "AuthenticationSDKProviders",
                 "AuthenticationSDKController",
                 "AuthenticationSDKValidation",
             ],
@@ -157,7 +103,7 @@ let package = Package(
         
 
         
-//MARK: - TESTE
+        //MARK: - TESTE -
         
     ]
 )
