@@ -68,6 +68,7 @@ let package = Package(
             name: "AuthenticationSDKSignUpProvider",
             dependencies: [
                 "AuthenticationSDKUseCaseGateway",
+                "AuthenticationSDKErrorProvider",
                 .product(name: "FirebaseAuth", package: "firebase-ios-sdk")
             ],
             path: "Sources/Detail/SignUpProvider"
@@ -103,6 +104,7 @@ let package = Package(
             name: "AuthenticationSDKSendEmailVerificationProvider",
             dependencies: [
                 "AuthenticationSDKUseCaseGateway",
+                "AuthenticationSDKErrorProvider",
                 .product(name: "FirebaseAuth", package: "firebase-ios-sdk")
             ],
             path: "Sources/Detail/SendEmailVerificationProvider"
