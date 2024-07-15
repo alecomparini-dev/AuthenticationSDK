@@ -23,7 +23,7 @@ class SignUpEmailPass: SignUpEmailPassProtocol {
 
         let signUpController = SignUpControllerImpl(signUpUseCase: signUpUseCase)
         
-        return try await signUpController.signUp(email: pass, pass: pass)
+        return try await signUpController.signUp(email: email, pass: pass)
     }
     
     
