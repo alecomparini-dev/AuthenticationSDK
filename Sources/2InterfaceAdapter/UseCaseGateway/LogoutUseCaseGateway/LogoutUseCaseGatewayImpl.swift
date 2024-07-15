@@ -5,9 +5,9 @@ import AuthenticationSDKDomain
 
 public class LogoutUseCaseGatewayImpl: LogoutUseCaseGateway {
     
-    private let logoutAuth: Logout
+    private let logoutAuth: LogoutProvider
     
-    public init(logoutAuth: Logout) {
+    public init(logoutAuth: LogoutProvider) {
         self.logoutAuth = logoutAuth
     }
     

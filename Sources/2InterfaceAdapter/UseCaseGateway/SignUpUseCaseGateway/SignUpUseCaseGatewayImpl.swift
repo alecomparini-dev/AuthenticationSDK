@@ -14,8 +14,8 @@ public class SignUpUseCaseGatewayImpl: SignUpUseCaseGateway {
     
 //  MARK: - PUBLIC AREA
     
-    public func signUp() async throws -> UserAuthInfoUseCaseDTO {
-        let userAuthGateway = try await signUpProvider.signUp()
+    public func signUp(email: String, pass: String) async throws -> UserAuthInfoUseCaseDTO {
+        let userAuthGateway = try await signUpProvider.signUp(email: email, pass: pass )
         
         return UserAuthInfoGatewayMapper().toUserAuthInfoUseCase(userAuthGateway)
     }

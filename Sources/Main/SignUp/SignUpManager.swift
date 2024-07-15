@@ -9,27 +9,34 @@ import AuthenticationSDKSignUpProvider
 public class SignUpManager {
         
     public func emailPass(email: String, password: String) async throws -> UserAuthInfoControllerDTO {
-        let signUp = SignUpEmailPass(signUpEmailPassProvider: FirebaseSignUpEmailPassProvider(email: email, pass: password))
-        return try await getResultSignUp(signUp: signUp)
+        let signUp = SignUpEmailPass(signUpEmailPassProvider: FirebaseSignUpEmailPassProvider())
+        return try await getResultSignUp(signUp: signUp, email: email, pass: password)
     }
     
-    public func emailPass(_ provider: SignUpProvider) async throws -> UserAuthInfoControllerDTO {
+    public func emailPass(email: String, password: String, provider: SignUpProvider) async throws -> UserAuthInfoControllerDTO {
         let signUp = SignUpEmailPass(signUpEmailPassProvider: provider)
-        return try await getResultSignUp(signUp: signUp)
+        return try await getResultSignUp(signUp: signUp, email: email, pass: password)
     }
     
 
 //  MARK: - PRIVATE AREA
     
-    func getResultSignUp(signUp: SignUpProtocol) async throws -> UserAuthInfoControllerDTO {
+    func getResultSignUp(signUp: SignUpEmailPassProtocol, email: String, pass: String) async throws -> UserAuthInfoControllerDTO {
+        
         do {
-            return try await signUp.signUp()
-        } catch SignInDomainError.passwordInvalid,
-                    SignInDomainError.emailInvalid,
-                    SignInDomainError.userOrPasswordInvalid {
-            throw SignInError.userOrPasswordInvalid
-        } catch {
-            throw SignInError.errorSignIn
+            return try await signUp.signUp(email: email, pass: pass)
+            
+        } catch DomainError.emailAlreadyInUse {
+            throw SignUpError.emailAlreadyInUse
+        
+        } catch DomainError.invalidEmail {
+            throw SignUpError.invalidEmail
+            
+        } catch DomainError.weakPassword {
+            throw SignUpError.weakPassword
+            
+        } catch let error {
+            throw SignUpError.unknownError(error.localizedDescription)
         }
     }
     

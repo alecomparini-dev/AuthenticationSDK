@@ -13,8 +13,8 @@ public class SignUpUseCaseImpl: SignUpUseCase {
     
 //  MARK: - PUBLIC AREA
     
-    public func signUp() async throws -> UserAuthInfoUseCaseDTO {
-        return try await signUpGateway.signUp()
+    public func signUp(email: String, pass: String) async throws -> UserAuthInfoUseCaseDTO {
+        return try await signUpGateway.signUp(email: email, pass: pass)
     }
     
 }

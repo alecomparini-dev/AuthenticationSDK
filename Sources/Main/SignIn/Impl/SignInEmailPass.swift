@@ -10,23 +10,27 @@ import AuthenticationSDKValidation
 
 class SignInEmailPass: SignInProtocol {
     
-    private let signInEmailPassProvider: SignInProvider
+    private let signInEmailPassProvider: SignInEmailPassProvider
+    private let email: String
+    private let pass: String
     
-    init(signInEmailPassProvider: SignInProvider) {
+    init(email: String, pass: String, signInEmailPassProvider: SignInEmailPassProvider) {
         self.signInEmailPassProvider = signInEmailPassProvider
+        self.email = email
+        self.pass = pass
     }
     
     func signIn() async throws -> UserAuthInfoControllerDTO {
         
-        let signInGateway = SignInUseCaseGatewayImpl(signInProvider: signInEmailPassProvider)
+        let signInGateway = SignInEmailPassUseCaseGatewayImpl(signInProvider: signInEmailPassProvider)
         
         let signInValidation = SignInEmailPassValidation()
         
-        let signInUseCase = SignInUseCaseImpl(signInGateway: signInGateway, signInValidation: signInValidation)
+        let signInUseCase = SignInEmailPassUseCaseImpl(signInGateway: signInGateway, signInValidation: signInValidation)
         
-        let signInController = SignInControllerImpl(signInUseCase: signInUseCase)
+        let signInController = SignInEmailPassControllerImpl(signInUseCase: signInUseCase)
         
-        return try await signInController.signIn()
+        return try await signInController.signIn(email: email, pass: pass)
     }
     
     

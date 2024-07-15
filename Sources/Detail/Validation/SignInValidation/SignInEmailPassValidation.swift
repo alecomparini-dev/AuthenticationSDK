@@ -10,11 +10,11 @@ public class SignInEmailPassValidation: SignInValidation {
     public func validate(userAuthInfo: UserAuthInfoUseCaseDTO) throws {
        
         if isUserAuthAnonymous(userAuthInfo) {
-            throw SignInDomainError.errorSignIn
+            throw DomainError.emailOrPassInvalid
         }
         
         if !isUserAuthEmailVerified(userAuthInfo) {
-            throw SignInDomainError.errorSignIn
+            throw DomainError.unverifiedEmail
         }
         
     }

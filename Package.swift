@@ -57,7 +57,8 @@ let package = Package(
         .target(
             name: "AuthenticationSDKSignInProvider",
             dependencies: [
-                "AuthenticationSDKController",
+                "AuthenticationSDKUseCaseGateway",
+                "AuthenticationSDKErrorProvider",
                 .product(name: "FirebaseAuth", package: "firebase-ios-sdk")
             ],
             path: "Sources/Detail/SignInProvider"
@@ -66,7 +67,7 @@ let package = Package(
         .target(
             name: "AuthenticationSDKSignUpProvider",
             dependencies: [
-                "AuthenticationSDKController",
+                "AuthenticationSDKUseCaseGateway",
                 .product(name: "FirebaseAuth", package: "firebase-ios-sdk")
             ],
             path: "Sources/Detail/SignUpProvider"
@@ -75,7 +76,6 @@ let package = Package(
         .target(
             name: "AuthenticationSDKLogoutProvider",
             dependencies: [
-                "AuthenticationSDKController",
                 .product(name: "FirebaseAuth", package: "firebase-ios-sdk")
             ],
             path: "Sources/Detail/LogoutProvider"
@@ -85,7 +85,6 @@ let package = Package(
             name: "AuthenticationSDKUserAuthInfoProvider",
             dependencies: [
                 "AuthenticationSDKUseCaseGateway",
-                "AuthenticationSDKController",
                 .product(name: "FirebaseAuth", package: "firebase-ios-sdk")
             ],
             path: "Sources/Detail/UserAuthInfoProvider"
@@ -94,10 +93,19 @@ let package = Package(
         .target(
             name: "AuthenticationSDKResetPassProvider",
             dependencies: [
-                "AuthenticationSDKController",
+                "AuthenticationSDKUseCaseGateway",
                 .product(name: "FirebaseAuth", package: "firebase-ios-sdk")
             ],
             path: "Sources/Detail/ResetPassProvider"
+        ),
+        
+        .target(
+            name: "AuthenticationSDKSendEmailVerificationProvider",
+            dependencies: [
+                "AuthenticationSDKUseCaseGateway",
+                .product(name: "FirebaseAuth", package: "firebase-ios-sdk")
+            ],
+            path: "Sources/Detail/SendEmailVerificationProvider"
         ),
         
         .target(
@@ -115,6 +123,15 @@ let package = Package(
                 "AuthenticationSDKController",
             ],
             path: "Sources/Detail/LocalAuthentication"
+        ),
+    
+        .target(
+            name: "AuthenticationSDKErrorProvider",
+            dependencies: [
+                "AuthenticationSDKUseCaseGateway",
+                .product(name: "FirebaseAuth", package: "firebase-ios-sdk")
+            ],
+            path: "Sources/Detail/_ErrorProvider"
         ),
 
         
