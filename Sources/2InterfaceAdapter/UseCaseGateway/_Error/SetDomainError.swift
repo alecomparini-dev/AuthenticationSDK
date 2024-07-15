@@ -11,4 +11,6 @@ public struct SetDomainError: Error {
         self.code = code
     }
     
+    public var error: DomainError { code }
+    
 }

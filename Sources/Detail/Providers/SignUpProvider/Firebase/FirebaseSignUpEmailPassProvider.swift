@@ -22,10 +22,10 @@ public class FirebaseSignUpEmailPassProvider: SignUpProvider {
             auth.createUser(withEmail: email, password: pass) { result, error in
 
                 if let error = error as? NSError {
-                    return continuation.resume(throwing: firebaseToDomainErrorMapper(error))
+                    return continuation.resume(throwing: firebaseToDomainErrorMapper(error).error )
                 }
 
-                guard let result else {return continuation.resume(throwing: SetDomainError(code: .unknownError("Sign Up Firebase Result null")))}
+                guard let result else {return continuation.resume(throwing: SetDomainError(code: .unknownError("Sign Up Firebase Result null")).error ) }
 
                 let userAuth = UserAuthInfoGatewayDTO (
                     userID: result.user.uid,
@@ -45,7 +45,7 @@ public class FirebaseSignUpEmailPassProvider: SignUpProvider {
     
     private func linkAnonymousToEmailAuthProviderIfNeeded(email: String, password: String) async throws -> UserAuthInfoGatewayDTO? {
         
-        guard let user = auth.currentUser else { throw SetDomainError(code: .userNotAuthenticated) }
+        guard let user = auth.currentUser else { throw SetDomainError(code: .userNotAuthenticated).error }
         
         if !user.isAnonymous { return nil }
         
@@ -56,7 +56,7 @@ public class FirebaseSignUpEmailPassProvider: SignUpProvider {
             user.link(with: credential) { result, error in
                 
                 if let error = error as? NSError {
-                    return continuation.resume(throwing: firebaseToDomainErrorMapper(error))
+                    return continuation.resume(throwing: firebaseToDomainErrorMapper(error).error )
                 }
                 
                 guard let result else { return continuation.resume(throwing: SetDomainError(code: .unknownError("Firebase SignIn Result null."))) }
