@@ -7,7 +7,7 @@ import AuthenticationSDKUseCaseGateway
 import AuthenticationSDKValidation
 
 
-class SignUpEmailPass: SignUpProtocol {
+class SignUpEmailPass: SignUpEmailPassProtocol {
     
     private let signUpProvider: SignUpProvider
     
@@ -15,7 +15,7 @@ class SignUpEmailPass: SignUpProtocol {
         self.signUpProvider = signUpEmailPassProvider
     }
     
-    func signUp() async throws -> UserAuthInfoControllerDTO {
+    func signUp(email: String, pass: String) async throws -> UserAuthInfoControllerDTO {
         
         let signUpGateway = SignUpUseCaseGatewayImpl(signUpProvider: signUpProvider)
 
@@ -23,7 +23,7 @@ class SignUpEmailPass: SignUpProtocol {
 
         let signUpController = SignUpControllerImpl(signUpUseCase: signUpUseCase)
         
-        return try await signUpController.signUp()
+        return try await signUpController.signUp(email: pass, pass: pass)
     }
     
     

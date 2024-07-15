@@ -13,7 +13,7 @@ public class GetUserAuthenticatedUseCaseImpl: GetUserAuthenticatedUseCase {
     
     public func getUser() async throws -> UserAuthInfoUseCaseDTO {
         
-        let userAuth: UserAuthInfoUseCaseDTO = try await getUserAuthenticatedGateway.getUser()
+        let userAuth: UserAuthInfoUseCaseDTO = try getUserAuthenticatedGateway.getUser()
         
         return UserAuthInfoUseCaseDTO(userID: userAuth.userID )
     }

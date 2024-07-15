@@ -2,5 +2,5 @@
 //
 
 public protocol SignUpUseCase {
-    func signUp() async throws -> UserAuthInfoUseCaseDTO
+    func signUp(email: String, pass: String) async throws -> UserAuthInfoUseCaseDTO
 }

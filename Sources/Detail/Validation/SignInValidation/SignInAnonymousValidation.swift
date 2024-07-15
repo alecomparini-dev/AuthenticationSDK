@@ -10,7 +10,7 @@ public class SignInAnonymousValidation: SignInValidation {
     public func validate(userAuthInfo: UserAuthInfoUseCaseDTO) throws {
         
         if !isUserAuthAnonymous(userAuthInfo) {
-            throw SignInDomainError.errorSignIn
+            throw DomainError.emailOrPassInvalid
         }
         
     }

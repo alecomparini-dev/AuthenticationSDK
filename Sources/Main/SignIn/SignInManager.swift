@@ -8,18 +8,13 @@ import AuthenticationSDKSignInProvider
 
 public class SignInManager {
         
-    public func anonymous(_ provider: SignInProvider? = nil) async throws -> UserAuthInfoControllerDTO {
+    public func anonymous(_ provider: SignInAnonymousProvider? = nil) async throws -> UserAuthInfoControllerDTO {
         let signIn = SignInAnonymous(signInAnonymousProvider: provider ?? FirebaseSignInAnonymous())
         return try await getResultSignIn(signIn: signIn)
     }
     
-    public func emailPass(email: String, password: String) async throws -> UserAuthInfoControllerDTO {
-        let signIn = SignInEmailPass(signInEmailPassProvider: FirebaseSignInEmailPass(email: email, pass: password))
-        return try await getResultSignIn(signIn: signIn)
-    }
-    
-    public func emailPass(_ provider: SignInProvider) async throws -> UserAuthInfoControllerDTO {
-        let signIn = SignInEmailPass(signInEmailPassProvider: provider)
+    public func emailPass(email: String, password: String, _ provider: SignInEmailPassProvider = FirebaseSignInEmailPass()) async throws -> UserAuthInfoControllerDTO {
+        let signIn = SignInEmailPass(email: email, pass: password, signInEmailPassProvider: provider)
         return try await getResultSignIn(signIn: signIn)
     }
     
@@ -37,12 +32,17 @@ public class SignInManager {
     func getResultSignIn(signIn: SignInProtocol) async throws -> UserAuthInfoControllerDTO {
         do {
             return try await signIn.signIn()
-        } catch SignInDomainError.passwordInvalid,
-                    SignInDomainError.emailInvalid,
-                    SignInDomainError.userOrPasswordInvalid {
-            throw SignInError.userOrPasswordInvalid
-        } catch {
-            throw SignInError.errorSignIn
+            
+        } catch DomainError.emailOrPassInvalid,
+                    DomainError.invalidEmail {
+            
+            throw SignInError.emailOrPassInvalid
+        
+        } catch DomainError.unverifiedEmail {
+            throw SignInError.unverifiedEmail
+            
+        } catch let error {
+            throw SignInError.unknownError(error.localizedDescription)
         }
     }
     

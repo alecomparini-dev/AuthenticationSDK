@@ -15,7 +15,7 @@ public class FirebaseUserAuthInfo: UserAuthInfo {
     public func getInfo() throws -> UserAuthInfoGatewayDTO {
         
         guard let currentUserID: String = auth.currentUser?.uid else {
-            throw SignInError(code: .userNotAuthenticated)
+            throw SetDomainError(code: .userNotAuthenticated)
         }
         
         return UserAuthInfoGatewayDTO (

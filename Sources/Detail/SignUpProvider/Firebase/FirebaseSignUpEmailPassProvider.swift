@@ -2,20 +2,17 @@
 //
 
 import AuthenticationSDKUseCaseGateway
+import AuthenticationSDKErrorProvider
 import FirebaseAuth
 
 public class FirebaseSignUpEmailPassProvider: SignUpProvider {
     private let auth: Auth
-    private let email: String
-    private let pass: String
     
-    public init(email: String, pass: String, _ auth: Auth = .auth()) {
-        self.email = email
-        self.pass = pass
+    public init(_ auth: Auth = .auth()) {
         self.auth = auth
     }
     
-    public func signUp() async throws -> UserAuthInfoGatewayDTO {
+    public func signUp(email: String, pass: String) async throws -> UserAuthInfoGatewayDTO {
         
         if let userAuth = await linkAnonymousToEmailAuthProviderIfNeeded(email: email, password: pass) {
             return userAuth
@@ -24,13 +21,13 @@ public class FirebaseSignUpEmailPassProvider: SignUpProvider {
         return try await withCheckedThrowingContinuation { continuation in
             
             auth.createUser(withEmail: email, password: pass) { result, error in
-                
-                if let _ = error as? NSError {
-                    return continuation.resume(throwing: SignInError(code: .errorSignIn))
+
+                if let error = error as? NSError {
+                    return continuation.resume(throwing: firebaseToDomainErrorMapper(error))
                 }
-                
-                guard let result else {return continuation.resume(throwing: SignInError(code: .errorSignIn))}
-                
+
+                guard let result else {return continuation.resume(throwing: SetDomainError(code: .unknownError("Sign Up Firebase Result null")))}
+
                 let userAuth = UserAuthInfoGatewayDTO (
                     userID: result.user.uid,
                     email: result.user.email,

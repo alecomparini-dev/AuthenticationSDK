@@ -5,9 +5,9 @@ import AuthenticationSDKDomain
 
 public class ResetPasswordUseCaseGatewayImpl: ResetPasswordUseCaseGateway {
 
-    private let resetPassword: ResetPassword
+    private let resetPassword: ResetPasswordProvider
     
-    public init(resetPassword: ResetPassword) {
+    public init(resetPassword: ResetPasswordProvider) {
         self.resetPassword = resetPassword
     }
 

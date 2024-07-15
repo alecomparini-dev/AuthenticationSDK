@@ -4,9 +4,10 @@
 import Foundation
 
 import AuthenticationSDKUseCaseGateway
+import AuthenticationSDKErrorProvider
 import FirebaseAuth
 
-public class FirebaseSignInAnonymous: SignInProvider {
+public class FirebaseSignInAnonymous: SignInAnonymousProvider {
     
     private let auth: Auth
     
@@ -21,19 +22,16 @@ public class FirebaseSignInAnonymous: SignInProvider {
             
             auth.signInAnonymously() { result , error  in
                 
-                if error != nil {
-                    continuation.resume(throwing: SignInError(code: .errorSignIn))
+                if let error = error as? NSError {
+                    continuation.resume(throwing: firebaseToDomainErrorMapper(error))
                     return
                 }
                 
-                guard let userID = result?.user.uid else {
-                    continuation.resume(throwing: SignInError(code: .errorSignIn))
-                    return
-                }
+                guard let result else { return continuation.resume(throwing: SetDomainError(code: .unknownError("Firebase SignIn Result null."))) }
                 
                 let userAuth = UserAuthInfoGatewayDTO (
-                    userID: userID,
-                    isAnonymous: result?.user.isAnonymous
+                    userID: result.user.uid,
+                    isAnonymous: result.user.isAnonymous
                 )
                 
                 continuation.resume(returning: userAuth)

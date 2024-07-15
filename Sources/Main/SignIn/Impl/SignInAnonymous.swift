@@ -8,21 +8,21 @@ import AuthenticationSDKValidation
 
 class SignInAnonymous: SignInProtocol {
     
-    private let signInAnonymousProvider: SignInProvider
+    private let signInAnonymousProvider: SignInAnonymousProvider
     
-    init(signInAnonymousProvider: SignInProvider) {
+    init(signInAnonymousProvider: SignInAnonymousProvider) {
         self.signInAnonymousProvider = signInAnonymousProvider
     }
     
     func signIn() async throws -> UserAuthInfoControllerDTO {
         
-        let signInGateway = SignInUseCaseGatewayImpl(signInProvider: signInAnonymousProvider)
+        let signInGateway = SignInAnonymousUseCaseGatewayImpl(signInProvider: signInAnonymousProvider)
         
         let signInValidation = SignInAnonymousValidation()
         
-        let signInUseCase = SignInUseCaseImpl(signInGateway: signInGateway, signInValidation: signInValidation)
+        let signInUseCase = SignInAnonymousUseCaseImpl(signInGateway: signInGateway, signInValidation: signInValidation)
         
-        let signInController = SignInControllerImpl(signInUseCase: signInUseCase)
+        let signInController = SignInAnonymousControllerImpl(signInUseCase: signInUseCase)
         
         return try await signInController.signIn()
     }
