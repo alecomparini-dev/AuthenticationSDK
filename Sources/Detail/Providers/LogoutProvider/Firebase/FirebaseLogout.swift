@@ -1,11 +1,11 @@
 //  Created by Alessandro Comparini on 01/11/23.
 //
 
+import AuthenticationSDKUseCaseGateway
 import Foundation
 import FirebaseAuth
-import AuthenticationSDKUseCaseGateway
 
-public class FirebaseLogout: Logout {
+public class FirebaseLogout: LogoutProvider {
     
     private let auth: Auth
     

@@ -4,7 +4,6 @@
 import Foundation
 
 import AuthenticationSDKUseCaseGateway
-import AuthenticationSDKErrorProvider
 import FirebaseAuth
 
 public class FirebaseSignInAnonymous: SignInAnonymousProvider {

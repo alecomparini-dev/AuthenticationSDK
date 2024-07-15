@@ -3,10 +3,10 @@
 
 import Foundation
 
-import FirebaseAuth
 import AuthenticationSDKUseCaseGateway
+import FirebaseAuth
 
-public class FirebaseResetPass: ResetPassword {
+public class FirebaseResetPass: ResetPasswordProvider {
     private let auth: Auth
     
     public init(auth: Auth = .auth()) {

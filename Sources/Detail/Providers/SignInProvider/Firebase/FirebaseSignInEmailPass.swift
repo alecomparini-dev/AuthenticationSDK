@@ -2,7 +2,6 @@
 //
 
 import AuthenticationSDKUseCaseGateway
-import AuthenticationSDKErrorProvider
 import FirebaseAuth
 
 
