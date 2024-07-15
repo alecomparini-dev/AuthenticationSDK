@@ -25,19 +25,29 @@ public class SignUpManager {
         
         do {
             return try await signUp.signUp(email: email, pass: pass)
-            
-        } catch DomainError.emailAlreadyInUse {
-            throw SignUpError.emailAlreadyInUse
         
-        } catch DomainError.invalidEmail {
-            throw SignUpError.invalidEmail
-            
-        } catch DomainError.weakPassword {
-            throw SignUpError.weakPassword
-            
         } catch let error {
+            
+            if let error = error as? DomainError {
+                switch error {
+                    case .invalidEmail:
+                        throw SignUpError.invalidEmail
+                    
+                    case .weakPassword:
+                        throw SignUpError.weakPassword
+                    
+                    case .emailAlreadyInUse:
+                        throw SignUpError.emailAlreadyInUse
+                    
+                    default:
+                        break
+                }
+            }
+            
             throw SignUpError.unknownError(error.localizedDescription)
+            
         }
+            
     }
     
 }
