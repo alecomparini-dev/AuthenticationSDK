@@ -31,20 +31,20 @@ public class SignUpManager {
             if let error = error as? DomainError {
                 switch error {
                     case .invalidEmail:
-                        throw SignUpError.invalidEmail
+                        throw SignUpAuthenticationSDKError.invalidEmail
                     
                     case .weakPassword:
-                        throw SignUpError.weakPassword
+                        throw SignUpAuthenticationSDKError.weakPassword
                     
                     case .emailAlreadyInUse:
-                        throw SignUpError.emailAlreadyInUse
+                        throw SignUpAuthenticationSDKError.emailAlreadyInUse
                     
                     default:
                         break
                 }
             }
             
-            throw SignUpError.unknownError(error.localizedDescription)
+            throw SignUpAuthenticationSDKError.unknownError(error.localizedDescription)
             
         }
             
