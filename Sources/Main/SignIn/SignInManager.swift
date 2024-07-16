@@ -36,13 +36,13 @@ public class SignInManager {
         } catch DomainError.emailOrPassInvalid,
                     DomainError.invalidEmail {
             
-            throw SignInError.emailOrPassInvalid
+            throw SignInAuthenticationSDKError.emailOrPassInvalid
         
         } catch DomainError.unverifiedEmail {
-            throw SignInError.unverifiedEmail
+            throw SignInAuthenticationSDKError.unverifiedEmail
             
         } catch let error {
-            throw SignInError.unknownError(error.localizedDescription)
+            throw SignInAuthenticationSDKError.unknownError(error.localizedDescription)
         }
     }
     
