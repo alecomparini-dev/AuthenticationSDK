@@ -22,7 +22,7 @@ public class FirebaseSignInAnonymous: SignInAnonymousProvider {
             auth.signInAnonymously() { result , error  in
                 
                 if let error = error as? NSError {
-                    continuation.resume(throwing: firebaseToDomainErrorMapper(error))
+                    continuation.resume(throwing: FirebaseErrorToDomainError().mapper(error) )
                     return
                 }
                 
