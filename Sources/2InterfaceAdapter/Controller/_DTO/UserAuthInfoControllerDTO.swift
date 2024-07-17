@@ -8,6 +8,7 @@ public struct UserAuthInfoControllerDTO {
     public let email: String?
     public let phoneNumber: String?
     public let isEmailVerified: Bool?
+    public let isAnonymous: Bool?
     public let displayName: String?
     public let photoURL: String?
 
@@ -15,12 +16,14 @@ public struct UserAuthInfoControllerDTO {
                 email: String? = nil,
                 phoneNumber: String? = nil,
                 isEmailVerified: Bool? = nil,
+                isAnonymous: Bool? = nil,
                 displayName: String? = nil,
                 photoURL: String? = nil) {
         self.userID = userID
         self.email = email
         self.phoneNumber = phoneNumber
         self.isEmailVerified = isEmailVerified
+        self.isAnonymous = isAnonymous
         self.displayName = displayName
         self.photoURL = photoURL
     }

@@ -4,6 +4,7 @@
 import AuthenticationSDKDomain
 import AuthenticationSDKController
 import AuthenticationSDKUseCaseGateway
+import AuthenticationSDKProviders
 import AuthenticationSDKValidation
 
 class SignInAnonymous: SignInProtocol {
@@ -16,11 +17,19 @@ class SignInAnonymous: SignInProtocol {
     
     func signIn() async throws -> UserAuthInfoControllerDTO {
         
+        let userAuthProvider = FirebaseUserAuthenticatedInfo()
+        
+        let userAuthGateway = UserAuthenticatedUseCaseGatewayImpl(userAuthenticated: userAuthProvider)
+        
+        let userAuthUseCase = UserAuthenticatedUseCaseImpl(userAuthenticatedGateway: userAuthGateway)
+
         let signInGateway = SignInAnonymousUseCaseGatewayImpl(signInProvider: signInAnonymousProvider)
         
         let signInValidation = SignInAnonymousValidation()
-        
-        let signInUseCase = SignInAnonymousUseCaseImpl(signInGateway: signInGateway, signInValidation: signInValidation)
+
+        let signInUseCase = SignInAnonymousUseCaseImpl(userAuth: userAuthUseCase,
+                                                       signInGateway: signInGateway,
+                                                       signInValidation: signInValidation)
         
         let signInController = SignInAnonymousControllerImpl(signInUseCase: signInUseCase)
         
