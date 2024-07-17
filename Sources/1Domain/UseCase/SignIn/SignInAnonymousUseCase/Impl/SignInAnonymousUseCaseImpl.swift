@@ -19,10 +19,8 @@ public class SignInAnonymousUseCaseImpl: SignInAnonymousUseCase {
     
     public func signIn() async throws -> UserAuthInfoUseCaseDTO {
         
-        let currentUser: UserAuthInfoUseCaseDTO? = await userAuth.getUser()
-        
-        if let userID = currentUser?.userID {
-            return UserAuthInfoUseCaseDTO(userID: userID)
+        if let currentUser: UserAuthInfoUseCaseDTO = await userAuth.getUser() {
+            return currentUser
         }
         
         let userAuth = try await signInGateway.signIn()
