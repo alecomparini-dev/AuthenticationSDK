@@ -21,7 +21,7 @@ public class FirebaseSignInEmailPass: SignInEmailPassProvider {
                 guard let result else { return continuation.resume(throwing: SetDomainError(code: .unknownError("Firebase SignIn Result null."))) }
                 
                 if let error = error as? NSError {
-                    return continuation.resume(throwing: firebaseToDomainErrorMapper(error))
+                    return continuation.resume(throwing: FirebaseErrorToDomainError().mapper(error).error)
                 }
                 
                 let userAuth = UserAuthInfoGatewayDTO (
