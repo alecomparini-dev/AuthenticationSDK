@@ -4,10 +4,12 @@
 
 public class SignInAnonymousUseCaseImpl: SignInAnonymousUseCase {
     
+    private let userAuth: UserAuthenticatedUseCase
     private let signInGateway: SignInAnonymousUseCaseGateway
     private let signInValidation: SignInValidation?
        
-    public init(signInGateway: SignInAnonymousUseCaseGateway, signInValidation: SignInValidation? = nil) {
+    public init(userAuth: UserAuthenticatedUseCase, signInGateway: SignInAnonymousUseCaseGateway, signInValidation: SignInValidation?) {
+        self.userAuth = userAuth
         self.signInGateway = signInGateway
         self.signInValidation = signInValidation
     }
@@ -16,6 +18,12 @@ public class SignInAnonymousUseCaseImpl: SignInAnonymousUseCase {
 //  MARK: - PUBLIC AREA
     
     public func signIn() async throws -> UserAuthInfoUseCaseDTO {
+        
+        let currentUser: UserAuthInfoUseCaseDTO? = await userAuth.getUser()
+        
+        if let userID = getUserIdIfUserAnonymous(currentUser) {
+            return UserAuthInfoUseCaseDTO(userID: userID)
+        }
         
         let userAuth = try await signInGateway.signIn()
         

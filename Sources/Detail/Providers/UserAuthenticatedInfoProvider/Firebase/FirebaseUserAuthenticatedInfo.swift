@@ -4,7 +4,7 @@
 import AuthenticationSDKUseCaseGateway
 import FirebaseAuth
 
-public class FirebaseUserAuthInfo: UserAuthInfo {
+public class FirebaseUserAuthenticatedInfo: UserAuthenticatedInfoProvider {
     
     private let auth: Auth
     
@@ -12,11 +12,9 @@ public class FirebaseUserAuthInfo: UserAuthInfo {
         self.auth = auth
     }
     
-    public func getInfo() throws -> UserAuthInfoGatewayDTO {
+    public func get() async -> UserAuthInfoGatewayDTO? {
         
-        guard let currentUserID: String = auth.currentUser?.uid else {
-            throw SetDomainError(code: .userNotAuthenticated)
-        }
+        guard let currentUserID: String = auth.currentUser?.uid else { return nil }
         
         return UserAuthInfoGatewayDTO (
             userID: currentUserID,
@@ -29,8 +27,6 @@ public class FirebaseUserAuthInfo: UserAuthInfo {
         )
         
     }
-    
-    
     
     
 }

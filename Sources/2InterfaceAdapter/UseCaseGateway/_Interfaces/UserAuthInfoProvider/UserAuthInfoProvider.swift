@@ -3,6 +3,6 @@
 
 import Foundation
 
-public protocol UserAuthInfo {
-    func getInfo() throws -> UserAuthInfoGatewayDTO
+public protocol UserAuthenticatedInfoProvider {
+    func get() async -> UserAuthInfoGatewayDTO?
 }
