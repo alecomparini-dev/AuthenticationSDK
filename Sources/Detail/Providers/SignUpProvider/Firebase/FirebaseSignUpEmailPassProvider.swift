@@ -45,7 +45,7 @@ public class FirebaseSignUpEmailPassProvider: SignUpProvider {
     
     private func linkAnonymousToEmailAuthProviderIfNeeded(email: String, password: String) async throws -> UserAuthInfoGatewayDTO? {
         
-        guard let user = auth.currentUser else { throw SetDomainError(code: .userNotAuthenticated).error }
+        guard let user = auth.currentUser else { return nil }
         
         if !user.isAnonymous { return nil }
         
