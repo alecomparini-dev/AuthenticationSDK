@@ -21,7 +21,7 @@ public class SignInAnonymousUseCaseImpl: SignInAnonymousUseCase {
         
         let currentUser: UserAuthInfoUseCaseDTO? = await userAuth.getUser()
         
-        if let userID = getUserIdIfUserAnonymous(currentUser) {
+        if let userID = currentUser?.userID {
             return UserAuthInfoUseCaseDTO(userID: userID)
         }
         
