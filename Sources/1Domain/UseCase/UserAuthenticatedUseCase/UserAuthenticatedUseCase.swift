@@ -4,5 +4,5 @@
 import Foundation
 
 public protocol UserAuthenticatedUseCase {
-    func getUser() async -> UserAuthInfoUseCaseDTO?
+    func getUser(_ refresh: Bool) async -> UserAuthInfoUseCaseDTO?
 }

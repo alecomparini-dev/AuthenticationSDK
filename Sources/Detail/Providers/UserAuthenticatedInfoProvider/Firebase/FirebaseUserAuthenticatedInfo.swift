@@ -12,21 +12,38 @@ public class FirebaseUserAuthenticatedInfo: UserAuthenticatedInfoProvider {
         self.auth = auth
     }
     
-    public func get() async -> UserAuthInfoGatewayDTO? {
+    
+//  MARK: - PUBLIC AREA
+    
+    public func get(_ reload: Bool = false) async -> UserAuthInfoGatewayDTO? {
         
-        guard let currentUserID: String = auth.currentUser?.uid else { return nil }
+        guard let currentUser = auth.currentUser else { return nil }
+        
+        do {
+            try await reloadCurrentUser(reload)
+        } catch {
+            return nil
+        }
         
         return UserAuthInfoGatewayDTO (
-            userID: currentUserID,
-            email: auth.currentUser?.email,
-            isAnonymous: auth.currentUser?.isAnonymous,
-            isEmailVerified: auth.currentUser?.isEmailVerified ?? false,
-            phoneNumber: auth.currentUser?.phoneNumber,
-            displayName: auth.currentUser?.displayName,
-            photoURL: auth.currentUser?.photoURL?.description
+            userID: currentUser.uid,
+            email: currentUser.email,
+            isAnonymous: currentUser.isAnonymous,
+            isEmailVerified: currentUser.isEmailVerified,
+            phoneNumber: currentUser.phoneNumber,
+            displayName: currentUser.displayName,
+            photoURL: currentUser.photoURL?.description
         )
         
     }
     
+    
+//  MARK: - PRIVATE AREA
+    
+    private func reloadCurrentUser(_ reload: Bool) async throws {
+        if reload {
+            try await auth.currentUser?.reload()
+        }
+    }
     
 }

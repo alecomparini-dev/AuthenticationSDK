@@ -11,9 +11,11 @@ public class UserAuthenticatedControllerImpl: UserAuthenticatedController {
         self.userAuthUseCase = userAuthUseCase
     }
     
+
+//  MARK: - PUBLIC AREA
     
-    public func getUser() async -> UserAuthInfoControllerDTO? {
-        let userAuthUseCase = await userAuthUseCase.getUser()
+    public func getUser(_ reload: Bool = false) async -> UserAuthInfoControllerDTO? {
+        let userAuthUseCase = await userAuthUseCase.getUser(reload)
         
         guard let userID = userAuthUseCase?.userID else { return nil }
         

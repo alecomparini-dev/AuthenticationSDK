@@ -4,5 +4,5 @@
 import Foundation
 
 public protocol UserAuthenticatedInfoProvider {
-    func get() async -> UserAuthInfoGatewayDTO?
+    func get(_ reload: Bool) async -> UserAuthInfoGatewayDTO?
 }

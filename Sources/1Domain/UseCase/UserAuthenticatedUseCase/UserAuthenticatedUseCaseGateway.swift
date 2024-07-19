@@ -2,5 +2,5 @@
 //
 
 public protocol UserAuthenticatedUseCaseGateway {
-    func getUser() async -> UserAuthInfoUseCaseDTO?
+    func getUser(_ refresh: Bool) async -> UserAuthInfoUseCaseDTO?
 }
