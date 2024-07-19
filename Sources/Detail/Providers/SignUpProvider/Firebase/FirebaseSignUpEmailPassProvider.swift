@@ -22,7 +22,7 @@ public class FirebaseSignUpEmailPassProvider: SignUpProvider {
             auth.createUser(withEmail: email, password: pass) { result, error in
 
                 if let error = error as? NSError {
-                    return continuation.resume(throwing: FirebaseErrorToDomainError().mapper(error) )
+                    return continuation.resume(throwing: FirebaseErrorToDomainError().mapper(error).error )
                 }
 
                 guard let result else {return continuation.resume(throwing: SetDomainError(code: .unknownError("Sign Up Firebase Result null")).error ) }
@@ -59,7 +59,7 @@ public class FirebaseSignUpEmailPassProvider: SignUpProvider {
                     return continuation.resume(throwing: FirebaseErrorToDomainError().mapper(error).error )
                 }
                 
-                guard let result else { return continuation.resume(throwing: SetDomainError(code: .unknownError("Firebase SignIn Result null."))) }
+                guard let result else { return continuation.resume(throwing: SetDomainError(code: .unknownError("User.link result null.")).error ) }
                 
                 let userAuth = UserAuthInfoGatewayDTO (
                     userID: result.user.uid,

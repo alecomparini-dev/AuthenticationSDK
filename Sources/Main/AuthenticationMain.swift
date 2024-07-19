@@ -5,9 +5,6 @@ import AuthenticationSDKController
 
 
 public class AuthenticationSDKMain {
-    private var _signIn: SignInManager?
-    private var _signUp: SignUpManager?
-    private var _user: UserAuthenticated?
     
     public init() { }
     
@@ -18,8 +15,7 @@ public class AuthenticationSDKMain {
     
     public var signUp: SignUpManager { SignUpManager() }
     
-    public var userAuth: UserAuthenticated? { UserAuthenticated() }
-    
+    public var userAuth: UserAuthenticatedManager { UserAuthenticatedManager() }
     
 }
 
