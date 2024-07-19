@@ -14,7 +14,7 @@ public class UserAuthenticatedManager {
 //  MARK: - PUBLIC AREA
     
     public func get(_ provider: UserAuthenticatedInfoProvider = FirebaseUserAuthenticatedInfo()) async -> UserAuthInfoControllerDTO? {
-        return await UserAuthenticated(userAuthProvider: provider).get()
+        return await GetUserAuthenticated(userAuthProvider: provider).get()
     }
     
     public func logout(_ provider: LogoutProvider = FirebaseLogout()) async throws {

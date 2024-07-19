@@ -2,5 +2,5 @@
 //
 
 public protocol ResetPasswordProvider {
-    func reset(userEmail: String) async -> Bool
+    func reset(_ email: String) async -> Bool
 }

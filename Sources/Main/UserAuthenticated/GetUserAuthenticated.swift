@@ -7,7 +7,7 @@ import AuthenticationSDKUseCaseGateway
 import AuthenticationSDKProviders
 
 
-class UserAuthenticated: UserAuthenticatedProtocol {
+class GetUserAuthenticated: UserAuthenticatedProtocol {
     
     private let userAuthProvider: UserAuthenticatedInfoProvider
     

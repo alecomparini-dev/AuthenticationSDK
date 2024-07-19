@@ -11,8 +11,8 @@ public class ResetPasswordUseCaseImpl: ResetPasswordUseCase {
         self.resetPasswordGateway = resetPasswordGateway
     }
     
-    public func reset(userEmail: String) async -> Bool {
-        return await resetPasswordGateway.reset(userEmail: userEmail)
+    public func reset(_ email: String) async -> Bool {
+        return await resetPasswordGateway.reset(email)
     }
     
 }

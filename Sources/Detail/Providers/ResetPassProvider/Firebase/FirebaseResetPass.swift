@@ -13,14 +13,16 @@ public class FirebaseResetPass: ResetPasswordProvider {
         self.auth = auth
     }
 
-    public func reset(userEmail: String) async -> Bool {
+    public func reset(_ email: String) async -> Bool {
+        
         return await withCheckedContinuation { continuation in
-            auth.sendPasswordReset(withEmail: userEmail) { error in
+            
+            auth.sendPasswordReset(withEmail: email) { error in
                 if error != nil {
-                    continuation.resume(returning: false)
-                } else {
-                    continuation.resume(returning: true)
+                    return continuation.resume(returning: false)
                 }
+                
+                continuation.resume(returning: true)
             }
         }
     }

@@ -17,5 +17,7 @@ public class AuthenticationSDKMain {
     
     public var userAuth: UserAuthenticatedManager { UserAuthenticatedManager() }
     
+    public var resetPass: ResetPass { ResetPass() }
+    
 }
 
