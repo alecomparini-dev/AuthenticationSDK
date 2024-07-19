@@ -18,7 +18,7 @@ class UserAuthenticated: UserAuthenticatedProtocol {
     
 //  MARK: - PUBLIC AREA
     
-    func get() async -> UserAuthInfoControllerDTO? {
+    func get(_ refresh: Bool = false) async -> UserAuthInfoControllerDTO? {
         
         let userAuthGateway = UserAuthenticatedUseCaseGatewayImpl(userAuthenticated: userAuthProvider)
         
@@ -26,7 +26,7 @@ class UserAuthenticated: UserAuthenticatedProtocol {
         
         let userAuthController = UserAuthenticatedControllerImpl(userAuthUseCase: userAuthUseCase)
         
-        return await userAuthController.getUser()
+        return await userAuthController.getUser(refresh)
     }
 
 }

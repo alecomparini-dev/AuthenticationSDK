@@ -4,5 +4,5 @@
 import Foundation
 
 public protocol UserAuthenticatedController {
-    func getUser() async -> UserAuthInfoControllerDTO?
+    func getUser(_ refresh: Bool) async -> UserAuthInfoControllerDTO?
 }

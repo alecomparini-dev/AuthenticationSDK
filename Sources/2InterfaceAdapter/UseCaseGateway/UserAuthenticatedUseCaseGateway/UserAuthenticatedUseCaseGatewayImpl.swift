@@ -14,9 +14,9 @@ public class UserAuthenticatedUseCaseGatewayImpl: UserAuthenticatedUseCaseGatewa
     
     //  MARK: - PUBLIC AREA
     
-    public func getUser() async -> UserAuthInfoUseCaseDTO? {
+    public func getUser(_ refresh: Bool = false) async -> UserAuthInfoUseCaseDTO? {
         
-        let userAuth: UserAuthInfoGatewayDTO? = await userAuthenticated.get()
+        let userAuth: UserAuthInfoGatewayDTO? = await userAuthenticated.get(refresh)
         
         guard let userID = userAuth?.userID else { return nil }
         

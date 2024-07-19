@@ -14,8 +14,8 @@ public class UserAuthenticatedUseCaseImpl: UserAuthenticatedUseCase {
     
 //  MARK: - PUBLIC AREA
     
-    public func getUser() async -> UserAuthInfoUseCaseDTO? {
-        return await userAuthenticatedGateway.getUser()
+    public func getUser(_ refresh: Bool = false) async -> UserAuthInfoUseCaseDTO? {
+        return await userAuthenticatedGateway.getUser(refresh)
     }
 
     

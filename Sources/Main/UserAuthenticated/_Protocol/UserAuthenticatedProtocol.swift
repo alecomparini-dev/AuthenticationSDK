@@ -4,6 +4,6 @@
 import AuthenticationSDKController
 
 protocol UserAuthenticatedProtocol {
-    func get() async -> UserAuthInfoControllerDTO?
+    func get(_ refresh: Bool) async -> UserAuthInfoControllerDTO?
 }
 
