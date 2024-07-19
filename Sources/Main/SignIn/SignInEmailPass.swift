@@ -2,8 +2,8 @@
 //  Created by Alessandro Comparini on 08/07/24.
 //
 
-import AuthenticationSDKDomain
 import AuthenticationSDKController
+import AuthenticationSDKDomain
 import AuthenticationSDKUseCaseGateway
 import AuthenticationSDKValidation
 
