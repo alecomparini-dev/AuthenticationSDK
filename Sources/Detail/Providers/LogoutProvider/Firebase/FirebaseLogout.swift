@@ -14,7 +14,12 @@ public class FirebaseLogout: LogoutProvider {
     }
     
     public func logout() throws {
-        try auth.signOut()
+        do {
+            try auth.signOut()
+        } catch let error {
+            throw FirebaseErrorToDomainError().mapper(error as NSError).error
+        }
+        
     }
     
     

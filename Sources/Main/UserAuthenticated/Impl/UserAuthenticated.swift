@@ -7,16 +7,18 @@ import AuthenticationSDKUseCaseGateway
 import AuthenticationSDKProviders
 
 
-public class UserAuthenticated: UserAuthenticatedProtocol {
+class UserAuthenticated: UserAuthenticatedProtocol {
     
     private let userAuthProvider: UserAuthenticatedInfoProvider
     
-    public init(userAuthProvider: UserAuthenticatedInfoProvider = FirebaseUserAuthenticatedInfo()) {
+    init(userAuthProvider: UserAuthenticatedInfoProvider) {
         self.userAuthProvider = userAuthProvider
     }
     
     
-    public func get() async -> UserAuthInfoControllerDTO? {
+//  MARK: - PUBLIC AREA
+    
+    func get() async -> UserAuthInfoControllerDTO? {
         
         let userAuthGateway = UserAuthenticatedUseCaseGatewayImpl(userAuthenticated: userAuthProvider)
         
@@ -26,5 +28,5 @@ public class UserAuthenticated: UserAuthenticatedProtocol {
         
         return await userAuthController.getUser()
     }
-    
+
 }
