@@ -19,5 +19,7 @@ public class AuthenticationSDKMain {
     
     public var resetPass: ResetPass { ResetPass() }
     
+//    public var sendEmail: 
+    
 }
 

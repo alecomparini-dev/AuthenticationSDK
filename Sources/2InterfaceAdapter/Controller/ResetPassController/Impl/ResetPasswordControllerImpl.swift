@@ -5,7 +5,6 @@ import AuthenticationSDKDomain
 
 public class ResetPasswordControllerImpl: ResetPasswordController {
     
-    
     private let resetPassUseCase: ResetPasswordUseCase
     
     public init(resetPassUseCase: ResetPasswordUseCase) {

@@ -6,7 +6,7 @@ public class SignInEmailPassUseCaseImpl: SignInEmailPassUseCase {
     
     private let signInGateway: SignInEmailPassUseCaseGateway
     private let signInValidation: SignInValidation?
-       
+    
     public init(signInGateway: SignInEmailPassUseCaseGateway, signInValidation: SignInValidation? = nil) {
         self.signInGateway = signInGateway
         self.signInValidation = signInValidation

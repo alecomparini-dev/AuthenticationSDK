@@ -17,11 +17,7 @@ class SignInAnonymous: SignInProtocol {
     
     func signIn() async throws -> UserAuthInfoControllerDTO {
         
-        let userAuthProvider = FirebaseUserAuthenticatedInfo()
-        
-        let userAuthGateway = UserAuthenticatedUseCaseGatewayImpl(userAuthenticated: userAuthProvider)
-        
-        let userAuthUseCase = UserAuthenticatedUseCaseImpl(userAuthenticatedGateway: userAuthGateway)
+        let userAuthUseCase = UserAuthenticatedUseCaseFactory.make()
 
         let signInGateway = SignInAnonymousUseCaseGatewayImpl(signInProvider: signInAnonymousProvider)
         

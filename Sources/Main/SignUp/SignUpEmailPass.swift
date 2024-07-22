@@ -17,9 +17,11 @@ class SignUpEmailPass: SignUpEmailPassProtocol {
     
     func signUp(email: String, pass: String) async throws -> UserAuthInfoControllerDTO {
         
+        let sendEmailUseCase = SendEmailVerificationUseCaseFactory.make()
+        
         let signUpGateway = SignUpUseCaseGatewayImpl(signUpProvider: signUpProvider)
 
-        let signUpUseCase = SignUpUseCaseImpl(signUpGateway: signUpGateway)
+        let signUpUseCase = SignUpUseCaseImpl(sendEmail: sendEmailUseCase, signUpGateway: signUpGateway)
 
         let signUpController = SignUpControllerImpl(signUpUseCase: signUpUseCase)
         
@@ -28,3 +30,5 @@ class SignUpEmailPass: SignUpEmailPassProtocol {
     
     
 }
+
+

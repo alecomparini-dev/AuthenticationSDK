@@ -12,14 +12,14 @@ public class FirebaseSendEmailVerification: SendEmailVerificationProvider {
         self.auth = auth
     }
     
-    public func sendEmail(email: String) async throws {
+    public func sendEmail(_ email: String) async throws {
 
         guard let user = auth.currentUser else { return }
         
         do {
             try await user.sendEmailVerification()
         } catch let error as NSError {
-            print("Erro: \(error.localizedDescription)")
+            throw FirebaseErrorToDomainError().mapper(error).error
         }
         
     }

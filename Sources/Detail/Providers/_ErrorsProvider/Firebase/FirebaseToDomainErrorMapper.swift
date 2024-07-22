@@ -32,7 +32,7 @@ public struct FirebaseErrorToDomainError {
                 return SetDomainError(code: .weakPassword)
 
             case .tooManyRequests:
-                return SetDomainError(code: .unknownError("tooManyRequests"))
+                return SetDomainError(code: .tooManyRequests)
                 
             case .userNotFound:
                 return SetDomainError(code: .userNotAuthenticated)
@@ -83,7 +83,7 @@ public struct FirebaseErrorToDomainError {
                 return SetDomainError(code: .unknownError("appNotAuthorized"))
                 
             case .expiredActionCode:
-                return SetDomainError(code: .unknownError("expiredActionCode"))
+                return SetDomainError(code: .expiredActionCode)
                 
             case .invalidActionCode:
                 return SetDomainError(code: .unknownError("invalidActionCode"))
