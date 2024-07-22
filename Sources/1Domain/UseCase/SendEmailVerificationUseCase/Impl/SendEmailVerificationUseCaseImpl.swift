@@ -3,8 +3,17 @@
 
 public class SendEmailVerificationUseCaseImpl: SendEmailVerificationUseCase {
     
-    public func sendEmail(email: String) async throws {
-        
+    private let sendEmailGateway: SendEmailVerificationUseCaseGateway
+    
+    public init(sendEmailGateway: SendEmailVerificationUseCaseGateway) {
+        self.sendEmailGateway = sendEmailGateway
+    }
+    
+    
+//  MARK: - PUBLIC AREA
+    
+    public func sendEmail(_ email: String) async throws {
+        return try await sendEmailGateway.sendEmail(email)
     }
     
 }

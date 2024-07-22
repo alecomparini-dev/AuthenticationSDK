@@ -2,5 +2,5 @@
 //
 
 public protocol SendEmailVerificationUseCaseGateway {
-    func sendEmail(email: String) async throws
+    func sendEmail(_ email: String) async throws
 }

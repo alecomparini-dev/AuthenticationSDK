@@ -12,5 +12,7 @@ public enum DomainError: Error {
     case invalidPhoneNumber
     case invalidVerificationSMSCode
     case internalError
+    case tooManyRequests
+    case expiredActionCode
     case unknownError(_ description: String? = nil)
 }

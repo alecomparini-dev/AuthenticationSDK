@@ -4,9 +4,11 @@
 
 public class SignUpUseCaseImpl: SignUpUseCase {
     
+    private let sendEmail: SendEmailVerificationUseCase
     private let signUpGateway: SignUpUseCaseGateway
     
-    public init(signUpGateway: SignUpUseCaseGateway) {
+    public init(sendEmail: SendEmailVerificationUseCase, signUpGateway: SignUpUseCaseGateway) {
+        self.sendEmail = sendEmail
         self.signUpGateway = signUpGateway
     }
     
@@ -14,7 +16,12 @@ public class SignUpUseCaseImpl: SignUpUseCase {
 //  MARK: - PUBLIC AREA
     
     public func signUp(email: String, pass: String) async throws -> UserAuthInfoUseCaseDTO {
-        return try await signUpGateway.signUp(email: email, pass: pass)
-    }
-    
+        
+        let userAuth = try await signUpGateway.signUp(email: email, pass: pass)
+        
+        try await sendEmail.sendEmail(email)
+        
+        return userAuth
+    }    
+        
 }
