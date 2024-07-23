@@ -10,6 +10,9 @@ public class ResetPass {
     
     public init() {}
     
+    
+//  MARK: - PUBLIC AREA
+    
     public func reset(_ email: String,_ provider: ResetPasswordProvider = FirebaseResetPass()) async -> Bool {
         
         let resetPassGateway = ResetPasswordUseCaseGatewayImpl(resetPassword: provider)
