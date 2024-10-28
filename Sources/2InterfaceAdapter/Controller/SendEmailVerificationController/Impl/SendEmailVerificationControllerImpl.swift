@@ -14,8 +14,8 @@ public class SendEmailVerificationControllerImpl: SendEmailVerificationControlle
     
 //  MARK: - PUBLIC AREA
     
-    public func sendEmail(_ email: String) async throws {
-        return try await sendEmailUseCase.sendEmail(email)
+    public func sendEmail() async throws {
+        return try await sendEmailUseCase.sendEmail()
     }
     
     

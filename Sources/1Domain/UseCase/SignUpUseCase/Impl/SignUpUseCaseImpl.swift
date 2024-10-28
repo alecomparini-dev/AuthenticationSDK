@@ -19,7 +19,7 @@ public class SignUpUseCaseImpl: SignUpUseCase {
         
         let userAuth = try await signUpGateway.signUp(email: email, pass: pass)
         
-        try await sendEmail.sendEmail(email)
+        try await sendEmail.sendEmail()
         
         return userAuth
     }    

@@ -12,8 +12,8 @@ public class SendEmailVerificationUseCaseImpl: SendEmailVerificationUseCase {
     
 //  MARK: - PUBLIC AREA
     
-    public func sendEmail(_ email: String) async throws {
-        return try await sendEmailGateway.sendEmail(email)
+    public func sendEmail() async throws {
+        return try await sendEmailGateway.sendEmail()
     }
     
 }
