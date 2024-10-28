@@ -12,7 +12,7 @@ public class FirebaseSendEmailVerification: SendEmailVerificationProvider {
         self.auth = auth
     }
     
-    public func sendEmail(_ email: String) async throws {
+    public func sendEmail() async throws {
 
         guard let user = auth.currentUser else { return }
         

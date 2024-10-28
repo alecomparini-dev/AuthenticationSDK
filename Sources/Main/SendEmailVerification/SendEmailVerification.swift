@@ -13,7 +13,7 @@ public class SendEmailVerification {
     
 //  MARK: - PUBLIC AREA
     
-    public func send(_ email: String, _ provider: SendEmailVerificationProvider = FirebaseSendEmailVerification()) async throws {
+    public func send(_ provider: SendEmailVerificationProvider = FirebaseSendEmailVerification()) async throws {
         
         let sendEmailGateway = SendEmailVerificationUseCaseGatewayImpl(sendEmailProvider: provider)
         
@@ -21,7 +21,7 @@ public class SendEmailVerification {
         
         let sendEmailController = SendEmailVerificationControllerImpl(sendEmailUseCase: sendEmailUseCase)
         
-        return try await sendEmailController.sendEmail(email)
+        return try await sendEmailController.sendEmail()
     }
     
 }
