@@ -7,7 +7,7 @@ import FirebaseAuth
 public struct FirebaseErrorToDomainError {
     
     public func mapper(_ error: NSError) -> SetDomainError {
-        guard let errorCode = AuthErrorCode.Code(rawValue: error.code) else { return SetDomainError(code: .unknownError()) }
+        guard let errorCode = AuthErrorCode(rawValue: error.code) else { return SetDomainError(code: .unknownError()) }
         
         switch errorCode {
             case .invalidCredential:
@@ -278,7 +278,10 @@ public struct FirebaseErrorToDomainError {
             case .malformedJWT:
                 return SetDomainError(code: .unknownError("malformedJWT"))
                 
-            @unknown default:
+            case .invalidHostingLinkDomain, .recaptchaSiteKeyMissing,.recaptchaActionCreationFailed:
+                return SetDomainError(code: .unknownError(error.localizedDescription))
+            
+            default:
                 return SetDomainError(code: .unknownError(error.localizedDescription))
                 
         }

@@ -6,7 +6,7 @@ let package = Package(
     name: "AuthenticationSDK",
     
     platforms: [
-        .iOS(.v14),
+        .iOS(.v16),
         .macOS(.v10_15)
     ],
 
@@ -15,7 +15,7 @@ let package = Package(
     ],
     
     dependencies: [
-        .package(url: "https://github.com/firebase/firebase-ios-sdk.git", .upToNextMajor(from: "10.28.0"))
+        .package(url: "https://github.com/firebase/firebase-ios-sdk.git", .upToNextMajor(from: "11.0.0"))
     ],
 
     
